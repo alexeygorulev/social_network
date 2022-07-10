@@ -1,28 +1,23 @@
 import React from "react";
 import s from './Auth.module.scss'
+import Login from "./Login/Login";
+import {NavLink} from 'react-router-dom'
+
+
+
 
 const Auth = () => {
+
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
         <div className={s.container__text}>
           <p> АВТОРИЗАЦИЯ </p>
         </div>
-        <div >
-          <form className={s.container_form} action="#">
-            <input type="text" />
-            <input type="text" />
-            <div>
-              <input type="checkbox" /> Запомнить меня
-            </div>
-            <div>
-              <button> ВОЙТИ</button>
-            </div>
-          </form>
-
-        </div>
-      </div>
-    </div>
+        <Login />
+        <NavLink to='/registration' className={s.container__registration}>Нет аккаунта?</NavLink>
+      </div >
+    </div >
   );
 }
 

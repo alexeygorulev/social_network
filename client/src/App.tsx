@@ -3,6 +3,7 @@ import './App.scss'
 import {Routes, Route} from 'react-router-dom'
 import Home from './pages/Home/Home';
 import Auth from './pages/Auth/Auth';
+import Registration from './pages/Auth/Registration/Registration';
 
 function App() {
   const token = false
@@ -17,6 +18,7 @@ function App() {
     return (
       <Routes>
         <Route path='/' element={<Auth />} />
+        <Route path='/registration' element={<Registration />} />
       </Routes>
 
 

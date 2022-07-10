@@ -18,14 +18,13 @@
   text-align: center;
   color:aliceblue;
   padding-top: 30px;
-  padding-bottom: 20vh;
+  padding-bottom: 5vh;
   font-weight: 600;
 }
-.container_form {
+.container__registration{
+  font-size: 0.9rem;
   text-align: center;
-  input {
-    margin-bottom: 13px;
-    padding: 0px 10px 0px 10px;
-    
-  }
+  display: block;
+  color: aliceblue;
 }
+
