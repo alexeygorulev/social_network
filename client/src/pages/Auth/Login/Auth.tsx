@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Auth.module.scss'
-import Login from "./Login/Login";
+import Login from "./Form/Login";
 import {NavLink} from 'react-router-dom'
 
 

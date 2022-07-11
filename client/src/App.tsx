@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss'
 import {Routes, Route} from 'react-router-dom'
 import Home from './pages/Home/Home';
-import Auth from './pages/Auth/Auth';
+import Auth from './pages/Auth/Login/Auth';
 import Registration from './pages/Auth/Registration/Registration';
 
 function App() {

@@ -16,6 +16,10 @@
       background-color: #2ecc71;
       transform: translate(0, 0.25em);
     }
+    &:active {
+      box-shadow: 0 3px 0 #00823F;
+      top: 3px;
+    }
   }
   p{
     color:rgb(255, 0, 51);
@@ -48,7 +52,6 @@
     position: relative;
 }
 .checkbox__input {
-  
   cursor: pointer;
   margin-top: 10px;
   -webkit-appearance: none;
@@ -85,7 +88,7 @@
     display: block;
     width: 16px;
     height: 16px;
-    background: url(../../../assets/img/checked.svg) no-repeat;
+    background: url(../../../../assets/img/checked.svg) no-repeat;
     background-size: 16px 16px ;
     position: absolute;
     opacity: 0;

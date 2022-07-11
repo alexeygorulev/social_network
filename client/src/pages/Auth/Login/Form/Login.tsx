@@ -7,11 +7,12 @@ import * as yup from 'yup'
 interface Values {
   email: string;
   password: string;
+  isRemember: boolean
 }
 
 const Login = () => {
   const validationSchema = yup.object().shape({
-    email: yup.string().email('Введите верный email').required('Обязательно'),
+    email: yup.string().email('Введите корректный email').required('Обязательно'),
     password: yup.string().typeError('Должно быть строкой').required('Обязательно')
   })
 
@@ -21,6 +22,7 @@ const Login = () => {
         initialValues={{
           email: '',
           password: '',
+          isRemember: false,
         }}
         validationSchema={validationSchema}
         validateOnBlur
@@ -31,7 +33,7 @@ const Login = () => {
           handleSubmit, dirty }) => (
           <Form>
             <div className={s.container_form} >
-              <label htmlFor="login" ></label>
+              <label htmlFor="email" ></label>
               <Field
                 className={s.email}
                 type="email"
@@ -56,15 +58,19 @@ const Login = () => {
                 {touched.password && errors.password && <p className={s.errors}>{errors.password}</p>}
               </p>
               <div className={s.container__checkbox}>
-                <input className={s.checkbox__input} type="checkbox" /> 
+                <Field
+                  type="checkbox"
+                  name="isRemember"
+                  className={s.checkbox__input}
+                />
                 <label className={s.checkbox__label}>Запомнить меня</label>
               </div>
-              <div>
+              <p>
                 <button
                   disabled={!isValid && !dirty}
                   type="submit"
                 > ВОЙТИ</button>
-              </div>
+              </p>
             </div>
           </Form>
         )}
