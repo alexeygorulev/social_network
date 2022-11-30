@@ -1,5 +1,5 @@
 import React from "react";
-import s from './Auth.module.scss'
+import s from "./Auth.module.scss";
 import LogIn from "./LogIn/LogIn";
 import SignUp from "./SignUp/SignUp";
 
@@ -10,8 +10,16 @@ const Auth = () => {
         <div className={s.container__row}>
           <div className={s.container__col}>
             <div className={s.container__login}>
-              <h6 className="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
-              <input className={s.checkbox} type="checkbox" id="reg-log" name="reg-log" />
+              <h6 className="mb-0 pb-3">
+                <span>Log In </span>
+                <span>Sign Up</span>
+              </h6>
+              <input
+                className={s.checkbox}
+                type="checkbox"
+                id="reg-log"
+                name="reg-log"
+              />
               <label htmlFor="reg-log"></label>
               <div className={s.card__wrap}>
                 <div className={s.card__wrapper}>
@@ -25,6 +33,6 @@ const Auth = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Auth;
