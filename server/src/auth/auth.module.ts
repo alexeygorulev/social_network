@@ -9,19 +9,17 @@ https://docs.nestjs.com/modules
 import { Module } from '@nestjs/common';
 
 @Module({
-  imports: [UsersModule, JwtModule.register({
-    secret: process.env.PRIVATE_KEY || 'SECRET',
-    signOptions: {
-      expiresIn: '24h'
-    }
-  })],
-  controllers: [
-    AuthController,],
-  providers: [
-    AuthService,],
-    exports: [
-      AuthModule,
-      JwtModule
-    ]
+  imports: [
+    UsersModule,
+    JwtModule.register({
+      secret: process.env.PRIVATE_KEY || 'SECRET',
+      signOptions: {
+        expiresIn: '24h',
+      },
+    }),
+  ],
+  controllers: [AuthController],
+  providers: [AuthService],
+  exports: [AuthModule, JwtModule],
 })
-export class AuthModule { }
+export class AuthModule {}

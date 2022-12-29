@@ -1,36 +1,25 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { ApiProperty } from '@nestjs/swagger';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-
-interface CreateUserAction {
-  email: string
-  password: string
-}
-@Table({ tableName: 'users' })
-export class User extends Model<User, CreateUserAction> {
-
+@Entity()
+export class User {
   @ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
-  @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
-  id: number
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @ApiProperty({ example: 'alexeygorulev@gmail.com', description: 'Почтовый ящик' })
-  @Column({ type: DataType.STRING, unique: true, allowNull: false })
-  email: string
+  @ApiProperty({ example: 'kekMaster', description: 'логин пользователя' })
+  @Column({ type: 'varchar', unique: true })
+  login: string;
 
-  @ApiProperty({ example: '123', description: 'Пароль' })
-  @Column({ type: DataType.STRING, allowNull: false })
-  password: string
+  @ApiProperty({ example: 'kekMaster', description: 'логин пользователя' })
+  @Column({ type: 'varchar' })
+  email: string;
 
-  @ApiProperty({ example: 'Alexey', description: 'Имя пользователя' })
-  @Column({ type: DataType.STRING, allowNull: false })
-  name: string
+  @ApiProperty({ example: 'kekPassword', description: 'пароль пользователя' })
+  @Column({ type: 'varchar' })
+  password: string;
 
-  @ApiProperty({ example: 'true', description: 'Бан пользователя' })
-  @Column({ type: DataType.BOOLEAN, defaultValue: false })
-  banned: boolean
-
-  @ApiProperty({ example: 'за дудос', description: 'Причина блокировки' })
-  @Column({ type: DataType.STRING, allowNull: true })
-  banReason: string
-
+  @ApiProperty({ example: 'Спам', description: 'Статус бана пользователя' })
+  @Column({ default: false })
+  ban: boolean;
 }

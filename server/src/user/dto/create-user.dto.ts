@@ -1,17 +1,21 @@
-import { ApiProperty } from "@nestjs/swagger"
-import { IsEmail, IsString, } from "class-validator"
-import {  } from "sequelize-typescript"
+import { IsString, Length, IsEmail } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
-  @ApiProperty({example: 'alexeygorulev@gmail.com', description: 'Почтовый ящик'})
-  @IsEmail({}, {message: 'не  корректный email'})
-  readonly email: string
-  @ApiProperty({example: '123', description: 'Пароль'})
-  @IsString({message: 'должно быть строкой'})
-  readonly password: string
-  @ApiProperty({example: 'Alexey', description: 'Имя пользователя'})
-  @IsString({message: 'должно быть строкой'})
-  readonly name: string
+  @ApiProperty({ example: 'kekMaster', description: 'логин пользователя' })
+  @IsString({ message: 'должно быть строкой' })
+  @Length(3, 15)
+  readonly login: string;
 
+  @ApiProperty({ example: 'kekMaster@gmail.com', description: 'почтовый адрес пользователя' })
+  @IsString({ message: 'должно быть строкой' })
+  @IsEmail({}, { message: 'не  корректный email' })
+  @Length(3, 30)
+  readonly email: string;
+
+  @ApiProperty({ example: 'kekPassword', description: 'пароль пользователя' })
+  @IsString({ message: 'должно быть строкой' })
+  @Length(3, 20)
+  readonly password: string;
 
 }
