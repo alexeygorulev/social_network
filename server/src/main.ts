@@ -9,6 +9,9 @@ async function start() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.use(cookieParser());
+  app.enableCors({
+    origin: 'http://localhost:3000'
+  });
   const config = new DocumentBuilder()
     .setTitle('Социальная сеть')
     .setDescription('Документация REST API')

@@ -9,7 +9,7 @@ import { Response } from 'express';
 import { User } from 'src/user/users.model';
 
 @ApiTags('Авторизация')
-@Controller('auth')
+@Controller('social_network_auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 

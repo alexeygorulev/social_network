@@ -3,13 +3,10 @@ import { User } from './users.model';
 import { UsersService } from './users.service';
 
 import {
-  Body,
   Controller,
   Delete,
   Get,
   Param,
-  Post,
-  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
