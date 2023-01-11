@@ -19,7 +19,7 @@ export class UsersService {
     const user = new User();
     user.login = createUserDto.login;
     user.password = createUserDto.password;
-    user.email = createUserDto.email
+    user.email = createUserDto.email;
 
     return this.usersRepository.save(user);
   }
@@ -28,7 +28,10 @@ export class UsersService {
   }
 
   getUserByLogin(login: string): Promise<User> {
-    return this.usersRepository.findOne({ where: {login }});
+    return this.usersRepository.findOne({ where: { login } });
+  }
+  getUserByEmail(email: string): Promise<User> {
+    return this.usersRepository.findOne({ where: { email } });
   }
 
   async remove(id: string): Promise<void> {

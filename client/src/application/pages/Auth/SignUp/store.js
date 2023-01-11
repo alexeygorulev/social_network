@@ -107,6 +107,9 @@ export const Store = types
         const errorMessage = error.response.data.message;
         if (error.name === 'SyntaxError') root.createNotificationMessage(LABELS.ERROR_FILL_FIELDS);
         if (errorMessage.includes(ERROR_LABELS.ERROR_EMAIL)) self.data.errorLabel[FIELDS.EMAIL] = LABELS.ERROR_EMAIL;
+        if (errorMessage.includes(ERROR_LABELS.ERROR_UNIQUE_EMAIL))
+          self.data.errorLabel[FIELDS.EMAIL] = LABELS.ERROR_UNIQUE_EMAIL;
+        if (errorMessage.includes(ERROR_LABELS.ERROR_LOGIN)) self.data.errorLabel[FIELDS.LOGIN] = LABELS.ERROR_LOGIN;
         if (errorMessage.includes(ERROR_LABELS.ERROR_LOGIN_MIN) || errorMessage.includes(ERROR_LABELS.ERROR_LOGIN_MAX))
           self.data.errorLabel[FIELDS.LOGIN] = LABELS.ERROR_LOGIN;
         if (errorMessage.includes(ERROR_LABELS.ERROR_PASSWORD))
