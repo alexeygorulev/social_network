@@ -2,6 +2,7 @@ import { changeQueryParams } from 'api/utils';
 import { types } from 'mobx-state-tree';
 import { create as createApiStore, Store as ApiStore } from '../api/network/store';
 import { create as createAuthContentStore, Store as AuthContentStore } from 'application/pages/Auth/store';
+import Cookies from 'react-cookie/cjs/Cookies';
 
 export const Store = types
   .model({
@@ -10,12 +11,16 @@ export const Store = types
     authContent: AuthContentStore,
     newMessage: types.string,
     checkNotification: types.boolean,
+    isToken: types.boolean,
+    initialized: types.boolean
   })
-  .views((self) => ({}))
+  .views((self) => ({
+    
+  }))
   .actions((self) => ({
     mount: () => {
-      self.init();
       self.mounted = true;
+      self.init();
     },
 
     unmount: () => {
@@ -23,6 +28,10 @@ export const Store = types
     },
     init: () => {
       self.initialized = false;
+      const cookie = new Cookies();
+      const token = cookie.get('token');
+      self.isToken = false;
+      if (token) self.isToken = true;
       changeQueryParams([], true);
       self.initialized = true;
     },
@@ -45,5 +54,7 @@ export function create() {
     authContent: createAuthContentStore(),
     newMessage: '',
     checkNotification: false,
+    isToken: false,
+    initialized: false
   });
 }

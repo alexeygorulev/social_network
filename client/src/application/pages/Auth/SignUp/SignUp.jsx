@@ -3,6 +3,8 @@ import { observer } from 'mobx-react';
 import InputText from 'application/common/Fields/InputText';
 import { useEffect } from 'react';
 import { FIELDS, LABELS } from './constants';
+import PropTypes from 'prop-types';
+
 
 const SignUp = (props) => {
   const { store, onLogin } = props;
@@ -91,4 +93,7 @@ const SignUp = (props) => {
   );
 };
 
+SignUp.propTypes ={
+  store: PropTypes.shape().isRequired
+}
 export default observer(SignUp);

@@ -3,6 +3,9 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { FIELDS, LABELS } from './constants';
 import InputText from 'application/common/Fields/InputText';
+import PropTypes from 'prop-types';
+import Loader from 'application/common/Loader/Loader';
+
 
 const LogIn = (props) => {
   const { store, onLogin } = props;
@@ -17,9 +20,7 @@ const LogIn = (props) => {
       if (mounted) unmount();
     };
   }, [mounted]);
-
   if (!mounted) return null;
-
   return (
     <div className={s.card__front}>
       <div className={s.center__wrap}>
@@ -70,5 +71,8 @@ const LogIn = (props) => {
     </div>
   );
 };
-
+LogIn.propTypes = {
+  store: PropTypes.shape().isRequired,
+  onLogin: PropTypes.bool.isRequired
+}
 export default observer(LogIn);

@@ -83,6 +83,7 @@ export const Store = types
           expires: new Date(decoded.exp * 20000),
         });
         self.returnToDefault();
+        root.init()
       } catch (error) {
         if (error.name === 'SyntaxError') root.createNotificationMessage(LABELS.ERROR_FILL_FIELDS);
         if (error.code === 'ERR_BAD_REQUEST') root.createNotificationMessage(LABELS.ERROR_BAD_REQUEST);

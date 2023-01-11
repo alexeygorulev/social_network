@@ -81,7 +81,7 @@ export const Store = types
       self.data.touched[FIELDS.PASSWORD] = false;
       self.data.touched[FIELDS.EMAIL] = false;
     },
-    addNewUser: flow(function* checkLogin() {
+    addNewUser: flow(function* addNewUser() {
       const root = getRoot(self);
       self.data.errorLabel = {};
       try {

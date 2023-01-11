@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import s from './Auth.module.scss';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
+import PropTypes from 'prop-types';
+
 
 const Auth = (props) => {
   const { store } = props;
@@ -42,5 +44,9 @@ const Auth = (props) => {
     </div>
   );
 };
+Auth.propTypes = {
+  store: PropTypes.shape().isRequired,
+};
+
 
 export default observer(Auth);

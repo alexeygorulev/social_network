@@ -7,7 +7,7 @@ import Component from './Auth';
 function Module(props) {
   const { store } = props;
   const { authContent } = store;
-  
+
   return <Component {...props} store={authContent} />;
 }
 
