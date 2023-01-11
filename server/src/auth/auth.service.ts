@@ -27,11 +27,18 @@ export class AuthService {
   }
 
   async registration(userDto: CreateUserDto, res: Response) {
-    try {
+   
       const candidate = await this.userService.getUserByLogin(userDto.login);
+      const candidateWithEmail = await this.userService.getUserByEmail(userDto.email);
       if (candidate) {
         throw new HttpException(
           'Пользователь с таким логином уже существует',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      if (candidateWithEmail) {
+        throw new HttpException(
+          'Пользователь с такой почтой уже существует',
           HttpStatus.BAD_REQUEST,
         );
       }
@@ -43,9 +50,7 @@ export class AuthService {
       const { token } = await this.generateToken(user);
       this.setCookie(res, token);
       return this.generateToken(user);
-    } catch (error) {
-      console.log(error);
-    }
+   
   }
   private async setCookie(res: Response, token) {
     res.cookie('token', token);
