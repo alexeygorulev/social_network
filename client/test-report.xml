@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\Users\Alexey\Desktop\social_network\client\src\application\pages\Auth\LogIn\__tests__\Login.test.jsx">
+    <testCase name="Login component should render Login component" duration="27"/>
+    <testCase name="Component snapshot" duration="31"/>
+    <testCase name="Component snapshot mounted false" duration="12"/>
+    <testCase name="Component testing login" duration="31">
+      <failure message="TypeError: root.createNotificationMessage is not a function"><![CDATA[TypeError: root.createNotificationMessage is not a function
+    at checkLogin (C:\Users\Alexey\Desktop\social_network\client\src\application\pages\Auth\LogIn\store.js:88:48)
+    at checkLogin.next (<anonymous>)
+    at apply (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:4427:51)
+    at executeAction (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx\src\core\action.ts:68:19)
+    at <unnamed action> (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx\src\core\action.ts:49:16)
+    at runMiddleWares (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:3258:40)
+    at runWithActionContext (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:3101:16)
+    at wrap (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:4413:13)
+    at onFulfilled (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:4427:21)
+    at apply (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:4419:17)
+    at executeAction (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx\src\core\action.ts:68:19)
+    at asyncActionInit (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx\src\core\action.ts:49:16)
+    at runMiddleWares (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:3258:40)
+    at runWithActionContext (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:3101:16)
+    at C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:4422:13
+    at new Promise (<anonymous>)
+    at Object.apply (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:4415:16)
+    at executeAction (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx\src\core\action.ts:68:19)
+    at bound flowSpawner (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx\src\core\action.ts:49:16)
+    at runMiddleWares (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:3258:40)
+    at runWithActionContext (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:3101:16)
+    at Proxy.res (C:\Users\Alexey\Desktop\social_network\client\node_modules\mobx-state-tree\dist\mobx-state-tree.js:3128:16)
+    at Proxy.<anonymous> (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-environment-jsdom\node_modules\jest-mock\build\index.js:854:25)
+    at C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-environment-jsdom\node_modules\jest-mock\build\index.js:449:39
+    at Proxy.<anonymous> (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-environment-jsdom\node_modules\jest-mock\build\index.js:457:13)
+    at Proxy.checkLogin (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-environment-jsdom\node_modules\jest-mock\build\index.js:170:19)
+    at Object.checkLogin (C:\Users\Alexey\Desktop\social_network\client\src\application\pages\Auth\LogIn\__tests__\Login.test.jsx:63:21)
+    at Promise.then.completed (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-circus\build\run.js:218:40)
+    at _runTest (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\Users\Alexey\Desktop\social_network\client\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\Users\Alexey\Desktop\social_network\client\node_modules\react-scripts\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\Users\Alexey\Desktop\social_network\client\node_modules\react-scripts\node_modules\jest-runner\build\runTest.js:475:34)
+    at TestRunner.runTests (C:\Users\Alexey\Desktop\social_network\client\node_modules\react-scripts\node_modules\jest-runner\build\index.js:101:12)
+    at TestScheduler.scheduleTests (C:\Users\Alexey\Desktop\social_network\client\node_modules\react-scripts\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (C:\Users\Alexey\Desktop\social_network\client\node_modules\react-scripts\node_modules\@jest\core\build\runJest.js:404:19)]]></failure>
+    </testCase>
+  </file>
+</testExecutions>

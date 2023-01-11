@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth/Login snapshot with mounted=false 1`] = `""`;
+
+exports[`Auth/Login snapshot with mounted=true 1`] = `
+<div
+  className="card__front"
+>
+  <div
+    className="center__wrap"
+  >
+    <div
+      style={
+        Object {
+          "textAlign": "center",
+        }
+      }
+    >
+      <h4
+        style={
+          Object {
+            "marginBottom": 5,
+            "paddingBottom": 5,
+          }
+        }
+      >
+        Log In
+      </h4>
+      <div
+        className="form__group"
+      >
+        <Memo(InputText)
+          id="PARAM_TYPES_ITEM_FIELD_LOGIN"
+          onBlur={[MockFunction]}
+          onChange={[MockFunction]}
+          placeholder="Your Login"
+          type="text"
+        />
+        <p
+          className="input__icon"
+        >
+          <span
+            className="material-symbols-outlined"
+          >
+            alternate_email
+          </span>
+        </p>
+      </div>
+      <div
+        className="form__group"
+        style={
+          Object {
+            "marginTop": 10,
+          }
+        }
+      >
+        <Memo(InputText)
+          id="PARAM_TYPES_ITEM_FIELD_PASSWORD"
+          onBlur={[MockFunction]}
+          onChange={[MockFunction]}
+          placeholder="Your Password"
+          type="password"
+        />
+        <p
+          className="input__icon"
+        >
+          <span
+            className="material-symbols-outlined"
+          >
+            lock
+          </span>
+        </p>
+      </div>
+      <button
+        className="btn"
+        disabled={false}
+        onClick={[MockFunction]}
+        type="submit"
+      >
+        submit
+      </button>
+      <p
+        style={
+          Object {
+            "margin": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        <a
+          className="link"
+          href="/"
+        >
+          Forgot your password?
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+`;
