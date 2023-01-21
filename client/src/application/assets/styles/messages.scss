@@ -1,0 +1,81 @@
+main .container .right {
+  height: max-content;
+  position: sticky;
+  top: $--sticky-top-right;
+  bottom: 0;
+}
+
+.right .messages {
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: 1px 3px 11px 2px rgba(0, 159, 255, 0.1);
+  border-radius: $--card-border-radius;
+  padding: $--card-padding;
+}
+.right .messages .heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.right .messages i {
+  font-size: 1.4rem;
+}
+
+.right .messages .search-bar {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.right .messages .category {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.right .messages .category h6 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 4px solid $--color-light;
+  padding-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.right .messages .category .active {
+  border-color: $--color-dark;
+}
+.right .messages .message-requests {
+  color: $--color-primary;
+}
+
+.right .messages .message {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: start;
+}
+.right .message .profile-photo {
+  position: relative;
+  overflow: visible;
+}
+.right .profile-photo img {
+  border-radius: 50%;
+}
+.right .messages .message:last-child {
+  margin: 0;
+}
+
+.right .messages .message p {
+  font-size: 0.8rem;
+}
+
+.right .messages .message .profile-photo .active {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  border: 3px solid $--color-white;
+  background: $--color-success;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

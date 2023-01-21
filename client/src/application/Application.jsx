@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home/Home';
+import Home from './pages/Home';
 import Auth from './pages/Auth';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import Toastify from './common/Teastify/Toastify';
 import Loader from './common/Loader/Loader';
+import LayoutHome from './components/LayoutHome/LayoutHome';
+import Layout from './components/Layout/Layout';
 
 function Application(props) {
   const { store } = props;
@@ -24,18 +26,20 @@ function Application(props) {
 
   if (isToken) {
     return (
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <LayoutHome>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </LayoutHome>
     );
   } else {
     return (
-      <>
+      <Layout>
         {checkNotification && <Toastify message={newMessage} />}
         <Routes>
           <Route path="/" element={<Auth />} />
         </Routes>
-      </>
+      </Layout>
     );
   }
 }

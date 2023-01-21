@@ -1,0 +1,27 @@
+.right .friend-requests {
+  margin-top: 1rem;
+}
+
+.right .friend-requests h4 {
+  color: $--color-gray;
+  margin: 1rem 0;
+}
+.right .request {
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: 1px 3px 11px 2px rgba(0, 159, 255, 0.1);
+  padding: $--card-padding;
+  margin-bottom: 0.7rem;
+  border-radius: 10px;
+}
+
+.right .request .info {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.right .request .action {
+  display: flex;
+  gap: 1rem;
+}

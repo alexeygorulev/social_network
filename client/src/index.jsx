@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./application/assets/styles/index.scss";
 import { BrowserRouter } from "react-router-dom";
 import Application from "./application";
-import Layout from "./application/components/Layout/Layout";
 
 function ApplicationWithHandlers() {
   const applicationProps = {
@@ -19,8 +18,6 @@ function ApplicationWithHandlers() {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Layout>
       <ApplicationWithHandlers />
-    </Layout>
   </BrowserRouter>
 );

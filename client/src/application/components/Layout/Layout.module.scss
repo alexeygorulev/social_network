@@ -1,20 +1,6 @@
 .wrapper {
-  background: -webkit-linear-gradient(
-    90deg,
-    #000000,
-    #230b10,
-    #331016,
-    #230b10,
-    #000000
-  );
-  background: linear-gradient(
-    90deg,
-    #000000,
-    #230b10,
-    #331016,
-    #230b10,
-    #000000
-  ); 
+  background: -webkit-linear-gradient(90deg, #000000, #230b10, #331016, #230b10, #000000);
+  background: linear-gradient(90deg, #000000, #230b10, #331016, #230b10, #000000);
   width: 100vw;
   height: 100vh;
 }

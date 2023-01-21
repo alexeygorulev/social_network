@@ -1,0 +1,29 @@
+main {
+  position: relative;
+  top: 5.4rem;
+}
+main .container {
+  display: grid;
+  grid-template-columns: 18vw auto 20vw;
+  column-gap: 2rem;
+  position: relative;
+  padding-top: 15px;
+}
+
+main .container .left {
+  height: max-content;
+  position: sticky;
+  top: $--sticky-top-left;
+}
+
+main .container .left .profile {
+  padding: $--card-padding;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: 1px 3px 11px 2px rgba(0, 159, 255, 0.1);
+  border-radius: $--card-border-radius;
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  width: 100%;
+}
