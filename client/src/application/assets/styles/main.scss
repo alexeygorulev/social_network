@@ -1,17 +1,15 @@
 main {
   position: relative;
-  top: 5.4rem;
   background: rgb(96, 15, 27);
   background: linear-gradient(0deg, rgba(15, 9, 42, 1) 7%, rgba(24, 30, 80, 1) 100%);
   min-height: 100vh;
-  
 }
 main .container {
   display: grid;
   grid-template-columns: 18vw auto 20vw;
   column-gap: 2rem;
   position: relative;
-  padding-top: 15px;
+  padding-top: 95px;
 }
 
 main .container .left {

@@ -1,0 +1,53 @@
+.basic-input-text {
+  background: transparent;
+  border-radius: 3px; //закругление углов (общее)
+  -webkit-border-radius: 3px; //закругление углов (Google Chrome)
+  -moz-border-radius: 3px; //закругление углов (FireFox)
+  -khtml-border-radius: 3px; //закругление углов (Safari)
+  outline: none; // удаляет обводку в браузерах хром(желтая) и сафари(синяя)
+  height: 24px; // высота на свое усмотрение
+  color: #cccccc; //цвет шрифта в обычном состоянии
+  font-size: 0.8rem;
+  width: 100%;
+}
+.input-select {
+  position: relative;
+  margin: 0 10px 0 0;
+  font-size: 0.8rem;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: inset 0 0 11px 2px rgba(0, 159, 255, 0.2);
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  & i {
+    position: absolute;
+    right: 10px;
+    top: 2px;
+    transform: rotate(180deg);
+  }
+  & input[type='text']::placeholder {
+    font-size: 0.8rem;
+  }
+}
+.basic-select__items {
+  position: absolute;
+  overflow-y: scroll;
+  max-height: 130px;
+  top: 44px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.basic-select__item {
+  padding: 5px 15px;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: inset 0 0 11px 2px rgba(0, 159, 255, 0.2);
+  border-radius: 5px;
+  z-index: 100;
+  &:hover {
+    box-shadow: none;
+  }
+}

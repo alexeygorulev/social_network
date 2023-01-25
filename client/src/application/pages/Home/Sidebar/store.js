@@ -31,6 +31,7 @@ export const Store = types
       self.mounted = false;
     },
     initActiveSidebar: () => {
+      self.sidebarItems.forEach(item => item.isActive = false)
       if(document.location.pathname === '/') self.sidebarItems[2].isActive = true
       self.sidebarItems = self.sidebarItems.map((item) =>
         document.location.pathname === item.url

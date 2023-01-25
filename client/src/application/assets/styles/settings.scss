@@ -1,10 +1,52 @@
 .settings__container {
   width: 100%;
-  height: 50vh;
+  margin: 0 auto;
   background: rgb(39, 6, 37);
   background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
   box-shadow: 1px 3px 11px 2px rgba(0, 159, 255, 0.2);
   border-radius: 20px;
-  padding: 40px;
+  padding: 0 40px 40px 40px;
+  & h2 {
+    text-align: center;
+    padding: 20px 0;
+  }
 }
 
+.settings__item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.setting__info {
+  text-align: end;
+  font-size: 0.8rem;
+  width: 40%;
+  margin-right: 20px;
+}
+.input_wrapper {
+  width: 60%;
+}
+.setting__input {
+  width: 60%;
+  font-size: 0.8rem;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: inset 0 0 11px 2px rgba(0, 159, 255, 0.2);
+  border-radius: $--border-radius;
+  padding: 10px 15px;
+  & i {
+    position: absolute;
+    right: 10px;
+    top: 2px;
+    transform: rotate(180deg);
+  }
+
+  & input[type='text']::placeholder {
+    font-size: 0.8rem;
+  }
+}
+.sittings__button {
+  width: 100%;
+  text-align: center;
+  padding-top: 15px;
+}
