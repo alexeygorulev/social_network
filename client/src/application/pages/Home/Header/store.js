@@ -1,5 +1,9 @@
-import { types } from 'mobx-state-tree';
+import { getRoot, types } from 'mobx-state-tree';
+import Cookies from 'react-cookie/cjs/Cookies';
+import jwt from 'jwt-decode';
+import { changeQueryParams } from 'api/utils';
 
+const cookie = new Cookies();
 export const Store = types
   .model({
     mounted: types.boolean,
@@ -13,6 +17,13 @@ export const Store = types
 
     unmount: () => {
       self.mounted = false;
+    },
+
+    logout: () => {
+      const root = getRoot(self)
+      changeQueryParams([], true);
+      cookie.remove('token')
+      root.init()
     },
   }));
 

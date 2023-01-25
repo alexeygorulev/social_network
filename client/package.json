@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@iconscout/react-unicons": "^1.1.6",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -43,12 +44,12 @@
     }
   },
   "devDependencies": {
-    "jest-canvas-mock": "^2.4.0",
-    "jest-sonar-reporter": "^2.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.7",
     "enzyme-to-json": "^3.6.2",
-    "jest": "26.0.1"
+    "jest": "26.0.1",
+    "jest-canvas-mock": "^2.4.0",
+    "jest-sonar-reporter": "^2.0.0"
   },
   "browserslist": {
     "production": [

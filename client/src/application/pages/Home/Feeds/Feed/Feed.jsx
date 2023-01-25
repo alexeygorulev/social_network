@@ -3,18 +3,6 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Feed = (props) => {
-  const { store } = props;
-  const { mounted, mount, unmount } = store;
-
-  useEffect(() => {
-    if (!mounted) mount();
-    return () => {
-      if (mounted) unmount();
-    };
-  }, [mounted]);
-
-  if (!mounted) return null;
-
   return (
     <>
       <div className="feed">
@@ -73,7 +61,4 @@ const Feed = (props) => {
   );
 };
 
-Feed.propTypes = {
-  store: PropTypes.shape().isRequired,
-};
 export default observer(Feed);

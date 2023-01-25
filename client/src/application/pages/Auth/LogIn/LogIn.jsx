@@ -5,7 +5,7 @@ import { FIELDS, LABELS } from './constants';
 import InputText from 'application/common/Fields/InputText';
 import PropTypes from 'prop-types';
 import Loader from 'application/common/Loader/Loader';
-
+import { Link } from 'react-router-dom';
 
 const LogIn = (props) => {
   const { store, onLogin } = props;
@@ -58,9 +58,11 @@ const LogIn = (props) => {
               <span className="material-symbols-outlined">lock</span>
             </p>
           </div>
-          <button disabled={disabled} onClick={checkLogin} type="submit" className={s.btn}>
-            submit
-          </button>
+          <Link to={'/feeds'}>
+            <button disabled={disabled} onClick={checkLogin} type="submit" className={s.btn}>
+              submit
+            </button>
+          </Link>
           <p style={{ textAlign: 'center', margin: 10 }}>
             <a href="/" className={s.link}>
               Forgot your password?
@@ -73,6 +75,6 @@ const LogIn = (props) => {
 };
 LogIn.propTypes = {
   store: PropTypes.shape().isRequired,
-  onLogin: PropTypes.bool.isRequired
-}
+  onLogin: PropTypes.bool.isRequired,
+};
 export default observer(LogIn);

@@ -1,0 +1,220 @@
+:root {
+  --igs: 3;
+}
+.container__profile {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.detail__wrapper {
+  display: flex;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: 1px 3px 11px 2px rgba(0, 159, 255, 0.2);
+  border-radius: 10px;
+  height: 15rem;
+}
+.photo__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
+  border-right: 3px solid rgba(39, 6, 37, 0.2);
+}
+
+.info__wrapper {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  justify-content: space-between;
+  align-items: center;
+  & ul,
+  li {
+    padding: 0;
+    margin: 0;
+  }
+  & li {
+    margin: 15px 0;
+  }
+  & :last-child {
+    align-items: flex-end;
+  }
+}
+
+.photo-profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.time-ago {
+  position: absolute;
+  border: 4px solid rgb(31, 30, 30);
+  border-radius: 16px;
+  padding: 3px 9px;
+  background: gray;
+  bottom: -10px;
+  right: -40px;
+  font-size: 0.8rem;
+  z-index: 5;
+  max-width: 100px;
+}
+.photo {
+  position: relative;
+  width: 9rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.name-profile {
+  font-size: 1.4rem;
+  font-weight: bold;
+  word-spacing: 10px;
+}
+.detailed-info {
+  position: absolute;
+  bottom: -45px;
+  left: 33px;
+  font-size: 1rem;
+  color: $--color-light;
+  z-index: 200;
+}
+
+.friends__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: 1px 3px 11px 2px rgba(0, 159, 255, 0.2);
+  border-radius: 10px;
+  padding: 0 20px;
+  & img {
+    width: 5rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  & p {
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+}
+.friends {
+  display: flex;
+  margin: 10px 0;
+}
+.friend {
+  margin: 0 10px;
+  text-align: center;
+}
+.music__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: 1px 3px 11px 2px rgba(0, 159, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px 15px;
+  & i {
+    margin: 5px;
+  }
+}
+.show-all {
+  display: flex;
+  justify-content: space-between;
+}
+
+.video__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: 1px 3px 11px 2px rgba(0, 159, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-top: 20px;
+}
+
+.post__container {
+  width: 100%;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  box-shadow: 1px 3px 11px 2px rgba(0, 159, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin: 30px 0;
+}
+
+.menu {
+  & i {
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & .toggle {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    cursor: pointer;
+    font-size: 2em;
+    transition: 1.25s;
+    z-index: 100;
+  }
+  & li {
+    position: absolute;
+    left: 0;
+    list-style: none;
+    transition: 0.5s;
+    transform: rotate(calc(360deg / 8 * var(--igs)));
+    transform-origin: 140px;
+    scale: 0;
+    transition-delay: calc(0.05s * var(--igs));
+    z-index: 120;
+    & a {
+      position: relative;
+      display: flex;
+      transform: rotate(calc(360deg / -8 * var(--igs)));
+      width: 60px;
+      height: 60px;
+      background: rgb(255, 255, 255);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      font-size: 0.75em;
+      box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+      transition: 0.5s;
+      z-index: 120;
+    }
+  }
+}
+.menu.active li {
+  scale: 1;
+}
+.menu.active .toggle {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 0 0 2px #333, 0 0 0 8px #fff;
+}
+
+.menu.active li:hover a {
+  font-size: 1.1rem;
+  box-shadow: 1px 0px 20px 2px rgba(73, 121, 157, 0.8);
+}

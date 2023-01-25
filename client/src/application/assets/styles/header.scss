@@ -86,8 +86,6 @@ nav .search-bar input[type='search']::placeholder {
   box-shadow: inset 0 0 11px 2px rgba(0, 159, 255, 0.1);
   border-radius: $--border-radius;
   padding: $--card-padding;
-  z-index: 100;
-  // display: none; // скрывает попап,
 }
 
 .notifications-popup::before {
@@ -130,4 +128,45 @@ i .notifications-count {
   display: flex;
   gap: 2rem;
   align-items: center;
+}
+.profile-photo {
+  cursor: pointer;
+}
+.header__right {
+  position: relative;
+}
+
+.logout-popup {
+  position: absolute;
+  border-radius: 8px;
+  width: 140px;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  top: 4rem;
+  padding: 0.5rem 0;
+  left: -90px;
+  box-shadow: 0 0 11px 2px rgba(0, 159, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & a {
+    color: $--color-light;
+  }
+  & a:hover {
+    opacity: 0.7;
+  }
+}
+
+.logout-popup::before {
+  content: '';
+  position: absolute;
+  width: 1.2rem;
+  height: 1.2rem;
+  transform: rotate(45deg);
+  display: block;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
+  right: 23px;
+  top: -7px;
 }

@@ -5,6 +5,8 @@ import { create as createStoryStore, Store as StoryStore } from 'application/pag
 import { create as createFeedStore, Store as FeedStore } from 'application/pages/Home/Feeds/store';
 import { create as createMessageStore, Store as MassageStore } from 'application/pages/Home/Messages/store';
 import { create as createRequestStore, Store as RequestStore } from 'application/pages/Home/Requests/store';
+import { create as createProfileStore, Store as ProfileStore } from 'application/pages/Home/Profile/store';
+import { create as createSettingsStore, Store as SettingsStore } from 'application/pages/Home/Settings/store';
 
 export const Store = types
   .model({
@@ -15,6 +17,8 @@ export const Store = types
     feedStore: FeedStore,
     requestStore: RequestStore,
     messageStore: MassageStore,
+    profileStore: ProfileStore,
+    settingsStore: SettingsStore,
 
   })
   .views((self) => ({}))
@@ -38,5 +42,7 @@ export function create() {
     feedStore: createFeedStore(),
     messageStore: createMessageStore(),
     requestStore: createRequestStore(),
+    profileStore: createProfileStore(),
+    settingsStore: createSettingsStore(),
   });
 }

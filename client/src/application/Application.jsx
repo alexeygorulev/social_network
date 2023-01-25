@@ -27,9 +27,7 @@ function Application(props) {
   if (isToken) {
     return (
       <LayoutHome>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <Home />
       </LayoutHome>
     );
   } else {

@@ -3,11 +3,12 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Story from './Stories';
 import Feeds from './Feeds';
-import Stories from './Stories';
 import Messages from './Messages';
 import Requests from './Requests';
+import { Route, Routes } from 'react-router-dom';
+import Profile from './Profile';
+import Settings from './Settings';
 
 const Home = (props) => {
   const { store } = props;
@@ -41,17 +42,12 @@ const Home = (props) => {
             <Sidebar />
           </div>
           <div className="middle">
-            <Stories />
-            <form className="create-post">
-              <div className="profile-photo">
-                <img src="./images//profile-1.jpg" alt="" />
-              </div>
-              <input type="text" placeholder="whats on yout mind" />
-              <input type="submit" value="Post" className="btn btn-primary" />
-            </form>
-            <div className="feeds">
-              <Feeds />
-            </div>
+            <Routes>
+              <Route path="/" element={<Feeds />} />
+              <Route path="/feeds" element={<Feeds />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/settings" element={<Settings />} />
+            </Routes>
           </div>
           <div className="right">
             <Messages />
