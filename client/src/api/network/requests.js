@@ -28,8 +28,22 @@ const addUser = (data) => {
     headers,
   });
 };
+const createSetting = (data) => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'POST',
+    url: URLS.CREATE_SETTING,
+    data,
+    headers,
+  });
+};
 
 export default {
   checkLogin,
-  addUser
+  addUser,
+  createSetting
 };

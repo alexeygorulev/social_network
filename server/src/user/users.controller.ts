@@ -19,6 +19,10 @@ export class UsersController {
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
+  @Get(':id')
+  findById(@Param('id') id: string): Promise<User> {
+    return this.usersService.getUserById(id);
+  }
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.usersService.remove(id);

@@ -7,6 +7,7 @@ https://docs.nestjs.com/providers#services
 
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm/repository/Repository';
+import { CreateSettingDto } from 'src/Settings/dto/create-setting.dto';
 
 @Injectable()
 export class UsersService {
@@ -32,6 +33,9 @@ export class UsersService {
   }
   getUserByEmail(email: string): Promise<User> {
     return this.usersRepository.findOne({ where: { email } });
+  }
+  getUserById(id: string): Promise<User> {
+    return this.usersRepository.findOne({ where: { id } });
   }
 
   async remove(id: string): Promise<void> {

@@ -1,13 +1,16 @@
+import { SettingsModule } from './Settings/settings.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './user/users.model';
 import { UsersModule } from './user/users.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Setting } from './Settings/settings.model';
 
 @Module({
   imports: [
-        AuthModule, 
+    SettingsModule,
+    AuthModule,
     UsersModule,
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`,
@@ -18,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       port: Number(process.env.POSTGRES_PORT),
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
-      entities: [User],
+      entities: [User, Setting],
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,

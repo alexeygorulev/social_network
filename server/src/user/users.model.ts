@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Setting } from 'src/Settings/settings.model';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -22,4 +23,7 @@ export class User {
   @ApiProperty({ example: 'Спам', description: 'Статус бана пользователя' })
   @Column({ default: false })
   ban: boolean;
+
+  @OneToMany(() => Setting, (setting) => setting.user)
+  setting: Setting;
 }

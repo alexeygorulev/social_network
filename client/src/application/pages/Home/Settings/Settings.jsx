@@ -8,7 +8,7 @@ import { FIELDS, LABELS } from './contants';
 
 const Settings = (props) => {
   const { store } = props;
-  const { mounted, mount, unmount, values, labels, onChange, day, month, year } = store;
+  const { mounted, mount, unmount, values, labels, onChange, day, month, year, createSetting } = store;
   const items = [
     { id: 1, title: 'Женат' },
     { id: 2, title: 'Не женат' },
@@ -103,7 +103,7 @@ const Settings = (props) => {
       </div>
 
       <div className='sittings__button'>
-        <button className='btn btn-primary'>Сохранить</button>
+        <button onClick={createSetting} className='btn btn-primary'>Сохранить</button>
       </div>
     </div>
   );

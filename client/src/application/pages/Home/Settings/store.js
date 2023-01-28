@@ -1,5 +1,7 @@
-import { getParent, getSnapshot, types } from 'mobx-state-tree';
+import { flow, getParent, getRoot, getSnapshot, types } from 'mobx-state-tree';
 import { FIELDS, LABELS } from './contants';
+import Cookies from 'react-cookie/cjs/Cookies';
+import jwt from 'jwt-decode';
 
 export const Values = types.model(
   Object.values(FIELDS).reduce((result, item) => ({ ...result, [item]: types.maybeNull(types.string) }), {}),
@@ -44,7 +46,7 @@ export const Store = types
     mount: () => {
       const parent = getParent(self);
       self.getDate();
-      parent.sidebarStore.init()
+      parent.sidebarStore.init();
       self.mounted = true;
     },
 
@@ -71,6 +73,27 @@ export const Store = types
         self.year.unshift(year);
       }
     },
+
+    createSetting: flow(function* createSetting() {
+      const root = getRoot(self);
+      const cookie = new Cookies();
+      const token = cookie.get('token');
+
+      const { id } = jwt(token);
+      console.log(id);
+      const data = {
+        id,
+        name: '',
+        lastName: '',
+        status: '',
+        familyStatus: '',
+        dateBirthday: '',
+        place: '',
+        university: '',
+      };
+
+      yield root.api.settingsStore.createSetting(data, token);
+    }),
   }));
 
 export function create() {

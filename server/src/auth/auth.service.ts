@@ -23,34 +23,34 @@ export class AuthService {
     const user = await this.validateUser(userDto);
     const { token } = await this.generateToken(user);
     this.setCookie(res, token);
-    return this.generateToken(user);
+    return { token };
   }
 
   async registration(userDto: CreateUserDto, res: Response) {
-   
-      const candidate = await this.userService.getUserByLogin(userDto.login);
-      const candidateWithEmail = await this.userService.getUserByEmail(userDto.email);
-      if (candidate) {
-        throw new HttpException(
-          'Пользователь с таким логином уже существует',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-      if (candidateWithEmail) {
-        throw new HttpException(
-          'Пользователь с такой почтой уже существует',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-      const hashPassword = await bcrypt.hash(userDto.password, 5);
-      const user = await this.userService.createUser({
-        ...userDto,
-        password: hashPassword,
-      });
-      const { token } = await this.generateToken(user);
-      this.setCookie(res, token);
-      return this.generateToken(user);
-   
+    const candidate = await this.userService.getUserByLogin(userDto.login);
+    const candidateWithEmail = await this.userService.getUserByEmail(
+      userDto.email,
+    );
+    if (candidate) {
+      throw new HttpException(
+        'Пользователь с таким логином уже существует',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    if (candidateWithEmail) {
+      throw new HttpException(
+        'Пользователь с такой почтой уже существует',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const hashPassword = await bcrypt.hash(userDto.password, 5);
+    const user = await this.userService.createUser({
+      ...userDto,
+      password: hashPassword,
+    });
+    const { token } = await this.generateToken(user);
+    this.setCookie(res, token);
+    return this.generateToken(user);
   }
   private async setCookie(res: Response, token) {
     res.cookie('token', token);
