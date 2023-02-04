@@ -11,6 +11,7 @@ export const FIELDS = keyMirrorWithPrefix(
     YEAR: null,
     CITY: null,
     UNIVERSITY: null,
+    ROLE: null,
   },
   'PARAM_TYPES_ITEM_FIELD_',
 );
@@ -27,4 +28,5 @@ export const LABELS = {
     { id: 4, title: 'Замужем' },
     { id: 5, title: 'Влюблен' },
   ],
+
 };

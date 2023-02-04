@@ -19,10 +19,9 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(userDto: UserDto, res: Response) {
+  async login(userDto: UserDto) {
     const user = await this.validateUser(userDto);
     const { token } = await this.generateToken(user);
-    this.setCookie(res, token);
     return { token };
   }
 
@@ -49,18 +48,16 @@ export class AuthService {
       password: hashPassword,
     });
     const { token } = await this.generateToken(user);
-    this.setCookie(res, token);
-    return this.generateToken(user);
+    return { token };
   }
-  private async setCookie(res: Response, token) {
-    res.cookie('token', token);
-  }
+
   private async generateToken(user: User) {
     const payload = {
       email: user.email,
       id: user.id,
       login: user.login,
       ban: user.ban,
+      role: user.role
     };
     return {
       token: this.jwtService.sign(payload),

@@ -1,23 +1,51 @@
-import { types } from 'mobx-state-tree';
+import { UserSettings } from 'api/network/store/profile';
+import { flow, getRoot, types } from 'mobx-state-tree';
+
+export const Data = types.model({});
 
 export const Store = types
   .model({
     mounted: types.boolean,
+    initialized: types.boolean,
+    settings: types.maybeNull(UserSettings),
+    defaultName: types.maybeNull(types.string)
   })
-  .views((self) => ({}))
+  .views((self) => ({
+    get profileData() {
+      return self.settings;
+    },
+  }))
 
   .actions((self) => ({
     mount: () => {
       self.mounted = true;
+      self.init();
     },
 
     unmount: () => {
       self.mounted = false;
     },
+    init: flow(function* init() {
+      const root = getRoot(self);
+      self.initialized = false;
+      try {
+        const result = yield root.api.userProfileStore.getUserProfile();
+        const { setting, ...rest } = result;
+        self.defaultName = rest.login
+        self.settings = setting[0]
+      } catch (error) {
+        console.log(error);
+      } finally {
+        self.initialized = true;
+      }
+    }),
   }));
 
 export function create() {
   return Store.create({
     mounted: false,
+    initialized: false,
+    settings: null,
+    defaultName: null,
   });
 }

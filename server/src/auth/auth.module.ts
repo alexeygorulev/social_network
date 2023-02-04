@@ -7,10 +7,12 @@ https://docs.nestjs.com/modules
 */
 
 import { Module } from '@nestjs/common';
-
+import { PassportModule } from '@nestjs/passport';
+import { forwardRef } from '@nestjs/common/utils';
 @Module({
   imports: [
-    UsersModule,
+    forwardRef(() => UsersModule ),
+    PassportModule,
     JwtModule.register({
       secret: process.env.PRIVATE_KEY || 'SECRET',
       signOptions: {
@@ -20,6 +22,6 @@ import { Module } from '@nestjs/common';
   ],
   controllers: [AuthController],
   providers: [AuthService],
-  exports: [AuthModule, JwtModule],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

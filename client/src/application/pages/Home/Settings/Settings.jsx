@@ -5,27 +5,24 @@ import { useState } from 'react';
 import InputSelect from 'application/common/Fields/InputSelect';
 import InputBasic from 'application/common/Fields/InputBasic';
 import { FIELDS, LABELS } from './contants';
+import Loader from 'application/common/Loader/Loader';
 
 const Settings = (props) => {
   const { store } = props;
-  const { mounted, mount, unmount, values, labels, onChange, day, month, year, createSetting } = store;
-  const items = [
-    { id: 1, title: 'Женат' },
-    { id: 2, title: 'Не женат' },
-  ];
+  const { mounted, mount, unmount, values, labels, onChange, day, month, year, createSetting, initialized } = store;
 
-  console.log(year);
   useEffect(() => {
     if (!mounted) mount();
     return () => {
       if (mounted) unmount();
     };
   }, [mounted]);
+  if (!initialized) return <Loader />;
 
   if (!mounted) return null;
   return (
     <div className="settings__container">
-        <h2>Настройки профиля</h2>
+      <h2>Настройки профиля</h2>
       <div className="settings__item">
         <div className="setting__info">Укажите ваше имя:</div>
         <InputBasic value={values[FIELDS.NAME]} id={FIELDS.NAME} onChange={onChange} placeholder={'Имя'} />
@@ -101,9 +98,10 @@ const Settings = (props) => {
           placeholder={'Ваш Университет'}
         />
       </div>
-
-      <div className='sittings__button'>
-        <button onClick={createSetting} className='btn btn-primary'>Сохранить</button>
+      <div className="sittings__button">
+        <button onClick={createSetting} className="btn btn-primary">
+          Сохранить
+        </button>
       </div>
     </div>
   );

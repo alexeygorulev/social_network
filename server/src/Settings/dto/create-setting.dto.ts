@@ -24,4 +24,6 @@ export class CreateSettingDto {
 
   @IsString({ message: 'должно быть строкой' })
   university: string;
+
+
 }

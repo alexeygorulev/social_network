@@ -5,11 +5,18 @@ export const FIELDS = keyMirrorWithPrefix(
     LOGIN: null,
     PASSWORD: null,
     EMAIL: null,
+    ROLE: null,
   },
   'PARAM_TYPES_ITEM_FIELD_',
 );
 
+
+
 export const LABELS = {
+  ROLE: [
+    { id: 1, title: 'Пользователь' },
+    { id: 3, title: 'Модератор' },
+  ],
   ERRORS_FIELDS: 'Обязательное поле',
   ERROR_BAD_REQUEST: 'Неправильный логин или пароль',
   ERROR_FILL_FIELDS: 'заполните, пожалуйста, все поля',
@@ -20,6 +27,8 @@ export const LABELS = {
   ERROR_EMAIL: 'не корректный email',
   ERROR_UNIQUE_EMAIL: 'Пользователь с такой почтой уже существует',
 };
+
+
 
 export const ERROR_LABELS = {
   ERROR_LOGIN: 'Пользователь с таким логином уже существует',

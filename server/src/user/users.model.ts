@@ -1,6 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Friend } from 'src/friends/friends.model';
 import { Setting } from 'src/Settings/settings.model';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
+export type UserRoleType = 'admin' | 'editor' | 'guest';
 
 @Entity()
 export class User {
@@ -24,6 +33,18 @@ export class User {
   @Column({ default: false })
   ban: boolean;
 
+  @Column({
+    type: 'enum',
+    enum: ['admin', 'editor', 'guest'],
+    default: 'guest',
+  })
+  role: UserRoleType;
+
   @OneToMany(() => Setting, (setting) => setting.user)
   setting: Setting;
+
+  @OneToMany(() => Friend, (friend) => friend.user)
+  friend: Friend[];
+
+
 }

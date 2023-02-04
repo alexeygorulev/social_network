@@ -10,6 +10,18 @@
   font-size: 0.8rem;
   width: 100%;
 }
+.input-search {
+  background: transparent;
+  border-radius: 3px; //закругление углов (общее)
+  -webkit-border-radius: 3px; //закругление углов (Google Chrome)
+  -moz-border-radius: 3px; //закругление углов (FireFox)
+  -khtml-border-radius: 3px; //закругление углов (Safari)
+  outline: none; // удаляет обводку в браузерах хром(желтая) и сафари(синяя)
+  height: 24px; // высота на свое усмотрение
+  color: #cccccc; //цвет шрифта в обычном состоянии
+  font-size: 0.9rem;
+  width: 100%;
+}
 .input-select {
   position: relative;
   margin: 0 10px 0 0;

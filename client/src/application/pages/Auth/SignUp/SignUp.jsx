@@ -4,7 +4,7 @@ import InputText from 'application/common/Fields/InputText';
 import { useEffect } from 'react';
 import { FIELDS, LABELS } from './constants';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 
 const SignUp = (props) => {
   const { store, onLogin } = props;
@@ -84,16 +84,18 @@ const SignUp = (props) => {
               <span className="material-symbols-outlined">lock</span>
             </p>
           </div>
-          <button disabled={disabled} onClick={addNewUser} type="submit" className={s.btn}>
-            submit
-          </button>
+          <Link to={'/profile'}>
+            <button disabled={disabled} onClick={addNewUser} type="submit" className={s.btn}>
+              submit
+            </button>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-SignUp.propTypes ={
-  store: PropTypes.shape().isRequired
-}
+SignUp.propTypes = {
+  store: PropTypes.shape().isRequired,
+};
 export default observer(SignUp);

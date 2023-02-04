@@ -78,10 +78,7 @@ export const Store = types
         }
         const result = yield root.api.authorizationStore.checkLogin(data);
         const { token } = result;
-        const decoded = jwt(token);
-        cookie.set('token', token, {
-          expires: new Date(decoded.exp * 20000),
-        });
+        cookie.set('token', token);
         self.returnToDefault();
         root.init()
       } catch (error) {

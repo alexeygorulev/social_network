@@ -7,14 +7,25 @@ const InputBasic = (props) => {
   const rootEl = useRef(null);
   const { items, placeholder, width, id, onChange, value } = props;
   const [values, setValues] = useState('');
+  useEffect(() => {
+    setValues(value);
+    return () => {
+      setValues(value);
+    };
+  }, [value]);
   const handleChange = (id, e) => {
-    setValues(e.target.value)
+    setValues(e.target.value);
     onChange({ id, values: e.target.value });
   };
-
   return (
     <div className="setting__input">
-      <input value={values} onChange={(e) => handleChange(id, e)} className="basic-input-text" type="text" placeholder={placeholder} />
+      <input
+        value={values}
+        onChange={(e) => handleChange(id, e)}
+        className="basic-input-text"
+        type="text"
+        placeholder={placeholder}
+      />
     </div>
   );
 };

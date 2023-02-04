@@ -1,5 +1,6 @@
 import { IsString, Length, IsEmail } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { UserRoleType } from '../users.model';
 
 export class CreateUserDto {
   @ApiProperty({ example: 'kekMaster', description: 'логин пользователя' })
@@ -17,5 +18,8 @@ export class CreateUserDto {
   @IsString({ message: 'должно быть строкой' })
   @Length(3, 20)
   readonly password: string;
+
+  @IsString({ message: 'должно быть строкой' })
+  role: UserRoleType;
 
 }

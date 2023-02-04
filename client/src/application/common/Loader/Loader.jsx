@@ -4,7 +4,7 @@ const Loader = () => {
   return (
     <div className={s.wrapperCenter}>
       <input type="checkbox" id="check" />
-      <label for="check">
+      <label htmlFor="check">
         <div className={s.check_icon}></div>
       </label>
     </div>

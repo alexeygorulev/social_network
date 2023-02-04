@@ -58,15 +58,15 @@ const LogIn = (props) => {
               <span className="material-symbols-outlined">lock</span>
             </p>
           </div>
-          <Link to={'/feeds'}>
+          <Link to={'/profile'}>
             <button disabled={disabled} onClick={checkLogin} type="submit" className={s.btn}>
               submit
             </button>
           </Link>
           <p style={{ textAlign: 'center', margin: 10 }}>
-            <a href="/" className={s.link}>
+            {/* <a href="/" className={s.link}>
               Forgot your password?
-            </a>
+            </a> */}
           </p>
         </div>
       </div>

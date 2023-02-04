@@ -18,23 +18,7 @@ const InputSelect = (props) => {
       document.removeEventListener('click', onClick);
     };
   }, []);
-  // const { values } = props;
-  // useEffect(() => {
-  //   if (values == null) setValueInput('');
-  //   return () => {};
-  // }, [values]);
-  // const handleChange = (e) => {
-  //   const { value } = e.target;
-  //   const { id, onChange } = props;
-  //   setValueInput(value);
-  //   onChange({ id, value });
-  // };
-  // const handleBlur = () => {
-  //   const { id, onBlur } = props;
-  //   setIsValid(!!isValid);
-  //   onBlur({ id, isValid });
-  // };
-  // const { placeholder, type } = props;
+
   return (
     <div
       ref={rootEl}

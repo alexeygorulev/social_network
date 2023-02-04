@@ -23,7 +23,6 @@ function Application(props) {
   if (!mounted) return null;
 
   if (!initialized) return <Loader />;
-
   if (isToken) {
     return (
       <LayoutHome>

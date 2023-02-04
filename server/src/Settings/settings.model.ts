@@ -1,7 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { User } from 'src/user/users.model';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-
 @Entity()
 export class Setting {
   @PrimaryGeneratedColumn()
@@ -27,6 +25,7 @@ export class Setting {
 
   @Column({ type: 'varchar' })
   university: string;
+
 
   @ManyToOne(() => User, (user) => user.setting)
     user: User

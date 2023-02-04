@@ -9,6 +9,7 @@ import Requests from './Requests';
 import { Route, Routes } from 'react-router-dom';
 import Profile from './Profile';
 import Settings from './Settings';
+import Friends from './Friends';
 
 const Home = (props) => {
   const { store } = props;
@@ -47,6 +48,7 @@ const Home = (props) => {
               <Route path="/feeds" element={<Feeds />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/friends" element={<Friends />} />
             </Routes>
           </div>
           <div className="right">

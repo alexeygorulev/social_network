@@ -7,6 +7,7 @@ import { create as createMessageStore, Store as MassageStore } from 'application
 import { create as createRequestStore, Store as RequestStore } from 'application/pages/Home/Requests/store';
 import { create as createProfileStore, Store as ProfileStore } from 'application/pages/Home/Profile/store';
 import { create as createSettingsStore, Store as SettingsStore } from 'application/pages/Home/Settings/store';
+import { create as createFriendsStore, Store as FriendsStore } from 'application/pages/Home/Friends/store';
 
 export const Store = types
   .model({
@@ -19,6 +20,7 @@ export const Store = types
     messageStore: MassageStore,
     profileStore: ProfileStore,
     settingsStore: SettingsStore,
+    friendsStore: FriendsStore,
 
   })
   .views((self) => ({}))
@@ -44,5 +46,6 @@ export function create() {
     requestStore: createRequestStore(),
     profileStore: createProfileStore(),
     settingsStore: createSettingsStore(),
+    friendsStore: createFriendsStore(),
   });
 }

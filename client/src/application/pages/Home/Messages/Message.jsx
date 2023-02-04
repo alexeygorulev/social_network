@@ -17,7 +17,6 @@ const Message = (props) => {
 
   return (
     <>
-      {' '}
       <div className="messages">
         <div className="heading">
           <h4>Messages</h4>

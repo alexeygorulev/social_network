@@ -90,6 +90,7 @@ export const Store = types
           login: self.data.values[FIELDS.LOGIN],
           password: self.data.values[FIELDS.PASSWORD],
           email: self.data.values[FIELDS.EMAIL],
+          role: 'guest'
         };
         self.checkFieldsOnSave();
         const checkByNull = self.checkFillFields(data);
@@ -98,10 +99,7 @@ export const Store = types
         }
         const result = yield root.api.authorizationStore.addNewUser(data);
         const { token } = result;
-        const decoded = jwt(token);
-        cookie.set('token', token, {
-          expires: new Date(decoded.exp * 1000),
-        });
+        cookie.set('token', token);
         self.returnToDefault();
       } catch (error) {
         const errorMessage = error.response.data.message;

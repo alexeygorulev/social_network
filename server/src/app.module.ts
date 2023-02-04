@@ -1,14 +1,21 @@
+import { FriendsModule } from './friends/friends.module';
 import { SettingsModule } from './Settings/settings.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './user/users.model';
 import { UsersModule } from './user/users.module';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Setting } from './Settings/settings.model';
+import { LoggerMiddleware } from './Settings/middleware/logger.middleware';
+import { SettingsController } from './Settings/settings.controller';
+import { RequestMethod } from '@nestjs/common/enums';
+import { AuthController } from './auth/auth.controller';
+import { Friend } from './friends/friends.model';
 
 @Module({
   imports: [
+    FriendsModule,
     SettingsModule,
     AuthModule,
     UsersModule,
@@ -21,7 +28,7 @@ import { Setting } from './Settings/settings.model';
       port: Number(process.env.POSTGRES_PORT),
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
-      entities: [User, Setting],
+      entities: [User, Setting, Friend],
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
@@ -30,4 +37,10 @@ import { Setting } from './Settings/settings.model';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes(SettingsController, AuthController);
+  }
+}

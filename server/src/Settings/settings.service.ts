@@ -9,7 +9,6 @@ import { Repository } from 'typeorm/repository/Repository';
 import { Setting } from './settings.model';
 import { CreateSettingDto } from './dto/create-setting.dto';
 import { UsersService } from 'src/user/users.service';
-import { User } from 'src/user/users.model';
 
 @Injectable()
 export class SettingsService {
@@ -48,13 +47,11 @@ export class SettingsService {
             university: settings.university,
           })
         : await this.settingsRepository.save(settings);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
-  async getSettingById(id) {
+  async getSettingById(id): Promise<Setting> {
     const user = await this.userService.getUserById(id);
-    const user2 = await this.settingsRepository.findOne({ where: { user } });
-    return { user, user2 };
+    const settingsUser = await this.settingsRepository.findOne({ where: { user } });
+    return settingsUser ;
   }
 }
