@@ -19,7 +19,7 @@ const Request = (props) => {
 
   return (
     <>
-      <h4>Requests</h4>
+      <h4 style={{marginTop: 10, paddingLeft: 10}}>Requests</h4>
       {users.map((item, key) => (
         <div key={item.id} className="friend-requests">
           <div className="request">

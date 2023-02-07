@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import InputSelect from 'application/common/Fields/InputSelect';
 import InputBasic from 'application/common/Fields/InputBasic';
 import { FIELDS, LABELS } from './contants';
@@ -9,7 +8,7 @@ import Loader from 'application/common/Loader/Loader';
 
 const Settings = (props) => {
   const { store } = props;
-  const { mounted, mount, unmount, values, labels, onChange, day, month, year, createSetting, initialized } = store;
+  const { mounted, mount, unmount, values,  onChange, day, month, year, createSetting, initialized } = store;
 
   useEffect(() => {
     if (!mounted) mount();

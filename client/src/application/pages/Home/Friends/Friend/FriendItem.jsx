@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react';
-import { getSnapshot } from 'mobx-state-tree';
 
 const FriendItem = ({ friend, isUsers, friendsRequests, createFriendRequest, friends }) => {
   const { setting } = friend;
@@ -10,7 +9,9 @@ const FriendItem = ({ friend, isUsers, friendsRequests, createFriendRequest, fri
           <img src="/" alt="" />
         </div>
         <div className="friend__info">
-          <h4>{!setting?.name || !setting?.lastName ? friend.login : `${setting.name} ${setting.lastName}`}</h4>
+          <h4>
+            {!setting[0]?.name || !setting[0]?.lastName ? friend.login : `${setting[0].name} ${setting[0].lastName}`}
+          </h4>
           {isUsers && friendsRequests.find((item) => item === friend.id) && (
             <span className="text-muted">Заявка уже отправлена</span>
           )}

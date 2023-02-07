@@ -5,7 +5,7 @@ import Item from './Item/Item';
 
 const Sidebar = (props) => {
   const { store } = props;
-  const { mounted, mount, unmount, listItems, changeClassOnActive } = store;
+  const { mounted, mount, unmount, listItems, changeClassOnActive, getProfile } = store;
   useEffect(() => {
     if (!mounted) mount();
     return () => {
@@ -19,7 +19,7 @@ const Sidebar = (props) => {
     <>
       <div className="sidebar">
         {listItems.map((item) => (
-          <Item key={item.title} item={item} changeClassOnActive={changeClassOnActive} />
+          <Item  key={item.title} item={item} changeClassOnActive={changeClassOnActive} />
         ))}
       </div>
     </>

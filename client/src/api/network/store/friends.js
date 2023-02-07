@@ -44,6 +44,19 @@ export const Store = types
         throw error;
       }
     }),
+    getFriends: flow(function* getFriends(id) {
+      try {
+        self.data.getFriends.fetch = true;
+        const result = yield requests.getFriendsList(id);
+        console.log(result);
+        const response = (result && result.data) || [];
+        self.data.getFriends.response = response;
+        self.data.getFriends.fetch = false;
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    }),
     getAllUsers: flow(function* getAllUsers() {
       try {
         self.data.getFriends.fetch = true;
@@ -86,7 +99,6 @@ export const Store = types
       try {
         self.data.getFriends.fetch = true;
         const result = yield requests.acceptFriend(data);
-        console.log(result);
         self.data.getFriends.fetch = false;
         return result;
       } catch (error) {

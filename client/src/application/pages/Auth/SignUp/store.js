@@ -1,7 +1,6 @@
 import { flow, getRoot, getSnapshot, types } from 'mobx-state-tree';
 import { ERROR_LABELS, FIELDS, LABELS } from './constants';
 import Cookies from 'react-cookie/cjs/Cookies';
-import jwt from 'jwt-decode';
 
 const cookie = new Cookies();
 
@@ -90,7 +89,7 @@ export const Store = types
           login: self.data.values[FIELDS.LOGIN],
           password: self.data.values[FIELDS.PASSWORD],
           email: self.data.values[FIELDS.EMAIL],
-          role: 'guest'
+          role: 'guest',
         };
         self.checkFieldsOnSave();
         const checkByNull = self.checkFillFields(data);
@@ -101,6 +100,7 @@ export const Store = types
         const { token } = result;
         cookie.set('token', token);
         self.returnToDefault();
+        root.init();
       } catch (error) {
         const errorMessage = error.response.data.message;
         if (error.name === 'SyntaxError') root.createNotificationMessage(LABELS.ERROR_FILL_FIELDS);

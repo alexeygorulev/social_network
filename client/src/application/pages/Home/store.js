@@ -1,4 +1,4 @@
-import { flow, types } from 'mobx-state-tree';
+import {  types } from 'mobx-state-tree';
 import { create as createHeaderStore, Store as HeaderStore } from 'application/pages/Home/Header/store';
 import { create as createSidebarStore, Store as SidebarStore } from 'application/pages/Home/Sidebar/store';
 import { create as createStoryStore, Store as StoryStore } from 'application/pages/Home/Stories/store';
@@ -34,10 +34,10 @@ export const Store = types
     unmount: () => {
       self.mounted = false;
     },
-    init: flow(function* () {
+    init: () => {
       self.initialized = false;
       self.initialized = true;
-    }),
+    },
   }));
 
 export function create() {

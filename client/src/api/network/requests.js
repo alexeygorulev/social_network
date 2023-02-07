@@ -64,6 +64,18 @@ const getProfile = () => {
     headers,
   });
 };
+const getFriendProfile = (id) => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'GET',
+    url: `${URLS.GET_FRIEND_PROFILE}${id}`,
+    headers,
+  });
+};
 const getFriends = () => {
   const apiParams = getApiParams();
   const headers = {};
@@ -73,6 +85,18 @@ const getFriends = () => {
   return getApiInstance()({
     method: 'GET',
     url: URLS.GET_FRIENDS_LIST,
+    headers,
+  });
+};
+const getFriendsList = (id) => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'GET',
+    url: `${URLS.GET_FRIENDS}${id}`,
     headers,
   });
 };
@@ -166,4 +190,6 @@ export default {
   acceptFriend,
   getFriendsAcceptList,
   declineRequestFriend,
+  getFriendProfile,
+  getFriendsList
 };

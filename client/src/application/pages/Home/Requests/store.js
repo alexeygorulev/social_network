@@ -32,6 +32,8 @@ export const Store = types
           acceptUserId: id,
         };
         yield root.api.friendsStore.acceptFriend(data);
+        yield root.homeStore.friendsStore.init()
+        yield root.homeStore.profileStore.uploadFriends()
         self.init();
       } catch (error) {}
     }),

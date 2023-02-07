@@ -5,11 +5,17 @@ import Feed from '../Feeds/Feed/Feed';
 import { Link } from 'react-router-dom';
 import Loader from 'application/common/Loader/Loader';
 import { LABELS } from './constants';
+import Friend from './Item/Friend';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
 
 const Profile = (props) => {
   const { store } = props;
-  const { mounted, mount, unmount, initialized, profileData, defaultName } = store;
+  const { mounted, mount, unmount, initialized, profileData, defaultName, friends, getFriendProfile, getListFriend } =
+    store;
   const [isActive, setIsActive] = useState(false);
+
   useEffect(() => {
     if (!mounted) mount();
     return () => {
@@ -76,16 +82,13 @@ const Profile = (props) => {
         {/* FRIENDS */}
 
         <div className="friends__container">
-          <p>Друзья</p>
+          <p>
+            <Link onClick={getListFriend} className="text-muted" to={'/friends'}>
+              Друзья
+            </Link>
+          </p>
           <div className="friends">
-            <div className="friend">
-              <img src={n} alt="" />
-              <span className="text-muted">Леха</span>
-            </div>
-            <div className="friend">
-              <img src={n} alt="" />
-              <span className="text-muted">Некит</span>
-            </div>
+            <Friend friends={friends} getFriendProfile={getFriendProfile} />
           </div>
         </div>
         {/* MUSIC */}

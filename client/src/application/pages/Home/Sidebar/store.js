@@ -1,4 +1,5 @@
-import { types } from 'mobx-state-tree';
+import { changeQueryParams } from 'api/utils';
+import { getParent, types } from 'mobx-state-tree';
 import { LIST_ITEMS } from './constants';
 
 export const SidebarItems = types.model({
@@ -31,8 +32,8 @@ export const Store = types
       self.mounted = false;
     },
     initActiveSidebar: () => {
-      self.sidebarItems.forEach(item => item.isActive = false)
-      if(document.location.pathname === '/') self.sidebarItems[2].isActive = true
+      self.sidebarItems.forEach((item) => (item.isActive = false));
+      if (document.location.pathname === '/') self.sidebarItems[2].isActive = true;
       self.sidebarItems = self.sidebarItems.map((item) =>
         document.location.pathname === item.url
           ? {
@@ -43,11 +44,27 @@ export const Store = types
       );
     },
     init: () => {
-      self.initActiveSidebar()
+      self.initActiveSidebar();
     },
     changeClassOnActive: (title) => {
+      const parent = getParent(self)
       self.sidebarItems.forEach((item) => (item.isActive = false));
       self.sidebarItems.forEach((item) => (item.title === title ? (item.isActive = true) : false));
+      if (title === 'Profile') {
+        changeQueryParams([], true);
+        self.getProfile();
+        
+      }
+      if (title === 'Friends') {
+        parent.friendsStore.init()
+        parent.profileStore.toggleOnMyProfile()
+
+
+      }
+    },
+    getProfile: () => {
+      const parent = getParent(self);
+      parent.profileStore.init();
     },
   }));
 

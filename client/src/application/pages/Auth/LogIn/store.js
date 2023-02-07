@@ -1,7 +1,6 @@
 import { flow, getRoot, getSnapshot, types } from 'mobx-state-tree';
 import { FIELDS, LABELS } from './constants';
 import Cookies from 'react-cookie/cjs/Cookies';
-import jwt from 'jwt-decode';
 
 const cookie = new Cookies();
 

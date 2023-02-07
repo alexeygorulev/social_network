@@ -39,6 +39,18 @@ export const Store = types
         throw error;
       }
     }),
+    getFriendProfile: flow(function* getFriendProfile(id) {
+      try {
+        self.data.getProfile.fetch = true
+        const result = yield requests.getFriendProfile(id);
+        const response = (result && result.data) || [];
+        self.data.getProfile.response = response
+        self.data.getProfile.fetch = false
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    }),
   }));
 
 export function create() {

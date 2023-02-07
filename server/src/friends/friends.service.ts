@@ -69,7 +69,7 @@ export class FriendsService {
         where: { acceptUserId: acceptId, requestUserId: requestId },
       });
       console.log(friendEntity);
-      
+
       return await this.friendsRepository.delete(friendEntity.id);
     } catch (error) {
       console.log(error);
@@ -78,8 +78,9 @@ export class FriendsService {
 
   async getFriendsList(req): Promise<any> {
     try {
-      const acceptId = req.id;
-
+      let acceptId = req.id ? req.id : req;
+      console.log(acceptId);
+      
       const friendEntityRequest = await this.friendsRepository.find({
         where: { request: false, requestUserId: acceptId },
       });
@@ -103,7 +104,7 @@ export class FriendsService {
         return await this.userService.getFriends(arrFriends);
       }
     } catch (error) {
-      throw new Error('kek');
+      console.log(error);
     }
   }
 

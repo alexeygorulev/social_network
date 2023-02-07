@@ -105,12 +105,11 @@
   }
 }
 .friends {
-  display: flex;
+  width: 100%;
   margin: 10px 0;
 }
 .friend {
   margin: 0 10px;
-  text-align: center;
 }
 .friends__count {
   padding-top: 10px;

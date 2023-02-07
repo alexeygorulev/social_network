@@ -31,7 +31,6 @@ const Friends = (props) => {
   if (!initialized) return <Loader />;
 
   if (!mounted) return null;
-  const n = require('application/assets/img/defaultPhoto.jpg');
   return (
     <>
       <div className="friends__container">

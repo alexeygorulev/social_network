@@ -7,6 +7,7 @@ import { Body, Controller, Req, Get, Post, UseGuards } from '@nestjs/common';
 import { CreateFriendDto } from './dto/create-friend.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Friend } from './friends.model';
+import { Query } from '@nestjs/common/decorators';
 
 @Controller('/friends')
 export class FriendsController {
@@ -32,6 +33,10 @@ export class FriendsController {
   getFriendsList(@Req() req): Promise<Friend[]> {
     return this.friendService.getFriendsList(req.user);
   }
+  @Get('/list')
+  getFriends(@Query() query): Promise<Friend[]> {
+    return this.friendService.getFriendsList(query.id);
+  }
   @Get('/requests')
   @UseGuards(JwtAuthGuard)
   findFriendRequest(@Req() req): Promise<Friend[]> {
@@ -44,7 +49,10 @@ export class FriendsController {
   }
   @Post('/decline')
   @UseGuards(JwtAuthGuard)
-  declineFriend(@Req() req, @Body() createFriendDto: CreateFriendDto): Promise<any> {
+  declineFriend(
+    @Req() req,
+    @Body() createFriendDto: CreateFriendDto,
+  ): Promise<any> {
     return this.friendService.declineFriend(createFriendDto, req.user);
   }
 }

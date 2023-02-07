@@ -1,5 +1,6 @@
 import { Friend } from 'api/network/store/friends';
-import { flow, getRoot, getSnapshot, types } from 'mobx-state-tree';
+import { setQueryParam } from 'api/utils';
+import { flow, getParent, getRoot, getSnapshot, types } from 'mobx-state-tree';
 import { STEPS } from './constants';
 
 export const Store = types
@@ -12,6 +13,7 @@ export const Store = types
     isUsers: types.boolean,
     counterFriends: types.number,
     requestFriends: types.maybeNull(types.array(types.string)),
+    id: types.maybeNull(types.string),
   })
   .views((self) => ({
     get visibility() {
@@ -24,15 +26,29 @@ export const Store = types
 
   .actions((self) => ({
     mount: () => {
-      self.init();
+      const parent = getParent(self);
+      parent.profileStore.isMyProfile ? self.init() : self.getFriends();
+      self.step = STEPS.FRIENDS_LIST;
       self.mounted = true;
     },
 
     unmount: () => {
       self.mounted = false;
     },
+    setIdFriend: (id) => {
+      self.id = id;
+    },
+    getFriends: flow(function* getFriends() {
+      const root = getRoot(self);
+      setQueryParam('id', self.id, true);
+      const paramsId = window.location.search;
+      const friendList = yield root.api.friendsStore.getFriends(paramsId);
+      self.friends = friendList || [];
+      self.counterFriends = self.friends.length;
+    }),
     init: flow(function* init() {
       const root = getRoot(self);
+      const parent = getParent(self);
       try {
         self.initialized = false;
         const result = yield root.api.friendsStore.getFriendsList();
@@ -73,7 +89,7 @@ export const Store = types
     stepFriendsList: flow(function* stepFriendsList() {
       self.initialized = false;
       self.isUsers = false;
-      yield self.init();
+      self.mount();
       self.step = STEPS.FRIENDS_LIST;
       self.initialized = true;
     }),

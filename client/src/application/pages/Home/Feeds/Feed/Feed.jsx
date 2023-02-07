@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react';
-import { useEffect } from 'react';
-import PropTypes from 'prop-types';
+
 
 const Feed = (props) => {
   return (
