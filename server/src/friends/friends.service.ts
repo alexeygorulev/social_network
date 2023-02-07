@@ -9,7 +9,6 @@ import { Repository } from 'typeorm/repository/Repository';
 import { UsersService } from 'src/user/users.service';
 import { Friend } from './friends.model';
 import { CreateFriendDto } from './dto/create-friend.dto';
-import e from 'express';
 
 @Injectable()
 export class FriendsService {
@@ -29,9 +28,8 @@ export class FriendsService {
       const requestFriend = new Friend();
       requestFriend.requestUserId = id;
       requestFriend.acceptUserId = createFriendDto.acceptUserId;
-      requestFriend.request = createFriendDto.request;
+      requestFriend.request = true;
 
-      const requestUser = await this.userService.getUserById(id);
       requestFriend.user = acceptUser;
 
       const checkByEntityReverse = await this.friendsRepository.findOne({
@@ -42,22 +40,100 @@ export class FriendsService {
       });
       if (checkByEntity || checkByEntityReverse) return;
 
-      await this.friendsRepository.save(requestFriend);
-
-      const acceptFriend = new Friend();
-      acceptFriend.requestUserId = id;
-      acceptFriend.acceptUserId = createFriendDto.acceptUserId;
-      acceptFriend.request = createFriendDto.request;
-      acceptFriend.user = requestUser;
-  
-      return await this.friendsRepository.save(acceptFriend);
+      return await this.friendsRepository.save(requestFriend);
     } catch (e) {
       console.log(e);
     }
-
-    // this.friendsRepository.save(requestFriend);
   }
+
+  async acceptNewFriend(createFriendDto: CreateFriendDto, req): Promise<any> {
+    try {
+      const acceptId = req.id;
+      const requestId = createFriendDto.acceptUserId;
+      const friendEntity = await this.friendsRepository.findOne({
+        where: { acceptUserId: acceptId, requestUserId: requestId },
+      });
+
+      friendEntity.request = false;
+      return await this.friendsRepository.save(friendEntity);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async declineFriend(createFriendDto: CreateFriendDto, req): Promise<any> {
+    try {
+      const acceptId = req.id;
+      const requestId = createFriendDto.requestUserId;
+
+      const friendEntity = await this.friendsRepository.findOne({
+        where: { acceptUserId: acceptId, requestUserId: requestId },
+      });
+      console.log(friendEntity);
+      
+      return await this.friendsRepository.delete(friendEntity.id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getFriendsList(req): Promise<any> {
+    try {
+      const acceptId = req.id;
+
+      const friendEntityRequest = await this.friendsRepository.find({
+        where: { request: false, requestUserId: acceptId },
+      });
+      const friendEntityAccept = await this.friendsRepository.find({
+        where: { request: false, acceptUserId: acceptId },
+      });
+
+      let arrFriends;
+      if (friendEntityRequest && friendEntityAccept) {
+        const arrAccept = friendEntityRequest.map((item) => item.acceptUserId);
+        const arrRequest = friendEntityAccept.map((item) => item.requestUserId);
+        arrFriends = [...arrAccept, ...arrRequest];
+        return await this.userService.getFriends(arrFriends);
+      }
+      if (friendEntityRequest) {
+        arrFriends = friendEntityRequest.map((item) => item.acceptUserId);
+        return await this.userService.getFriends(arrFriends);
+      }
+      if (friendEntityAccept) {
+        arrFriends = friendEntityAccept.map((item) => item.requestUserId);
+        return await this.userService.getFriends(arrFriends);
+      }
+    } catch (error) {
+      throw new Error('kek');
+    }
+  }
+
   findAll(): Promise<Friend[]> {
     return this.friendsRepository.find();
+  }
+  async findFriendRequest(requestToken): Promise<any> {
+    const { id } = requestToken;
+
+    const users = await this.friendsRepository.find({
+      where: { request: true, requestUserId: id },
+    });
+    return users.map((item) => item.acceptUserId);
+  }
+
+  async acceptListFriends(requestToken): Promise<any> {
+    const { id } = requestToken;
+    const allUsers = await this.userService.findAcceptUsers(requestToken);
+
+    const users = await this.friendsRepository.find({
+      where: { request: true, acceptUserId: id },
+    });
+
+    const requestUserId = users.map((item) => item.requestUserId);
+    const requestFriends = allUsers.map((item) => {
+      for (let i = 0; i < requestUserId.length; i++) {
+        if (item.id === requestUserId[i]) return item;
+      }
+    });
+
+    return requestFriends.filter((item) => item != null);
   }
 }

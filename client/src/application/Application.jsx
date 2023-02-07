@@ -8,13 +8,18 @@ import Toastify from './common/Teastify/Toastify';
 import Loader from './common/Loader/Loader';
 import LayoutHome from './components/LayoutHome/LayoutHome';
 import Layout from './components/Layout/Layout';
+import { configureApiInstance as configureAdminApiInstance } from '../api/network';
 
 function Application(props) {
-  const { store } = props;
-  const { mounted, mount, unmount, initialized, newMessage, checkNotification, isToken } = store;
+  const { store, adminApi } = props;
+  const { mounted, mount, unmount, initialized, newMessage, checkNotification, isToken, token } = store;
+  useEffect(() => {
+    adminApi.authorizationToken = token;
+    configureAdminApiInstance(adminApi);
+    return () => {};
+  }, [token]);
   useEffect(() => {
     if (!mounted) mount();
-
     return () => {
       if (mounted) unmount();
     };

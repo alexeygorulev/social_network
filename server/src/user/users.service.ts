@@ -25,8 +25,34 @@ export class UsersService {
 
     return this.usersRepository.save(user);
   }
-  findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+  async findAll(req): Promise<any> {
+    const id = req;
+    const users = await this.usersRepository.find({
+      relations: {
+        setting: true,
+        friend: true,
+      },
+    });
+    return users
+      .map((item) => {
+        delete item.password;
+        return item;
+      })
+      .filter((item) => item.id != id);
+  }
+  async findAcceptUsers(req): Promise<any> {
+    const id = req;
+    const users = await this.usersRepository.find({
+      relations: {
+        setting: true,
+      },
+    });
+    return users
+      .map((item) => {
+        delete item.password;
+        return item;
+      })
+      .filter((item) => item.id != id);
   }
 
   getUserByLogin(login: string): Promise<User> {
@@ -36,26 +62,34 @@ export class UsersService {
     return this.usersRepository.findOne({ where: { email } });
   }
   async getUserById(id: string): Promise<any> {
+    const users2 = await this.usersRepository.findOne({
+      where: { id },
+      relations: {
+        friend: true,
+        setting: true,
+      },
+    });
 
-      const users2 = await this.usersRepository.findOne({
-        where: { id },
-        relations: {
-          friend: true,
-          setting: true
-        },
-      });
-        
-
-    const {password, ...rest}  = users2;
+    const { password, ...rest } = users2;
     return rest;
   }
 
   async remove(id: string): Promise<void> {
     await this.usersRepository.delete(id);
   }
-  async saveFriend(friend: any, id: string): Promise<any> {
- 
+  async getFriends(arrFriendsId): Promise<any> {
+    let arrFriend = [];
+    for (let i = 0; i < arrFriendsId.length; i++) {
+      const arrFriendItem = await this.usersRepository.findOne({
+        where: { id: arrFriendsId[i] },
+        relations: {
+          setting: true,
+        },
+      });
+      delete arrFriendItem.password;
+      arrFriend.push(arrFriendItem);
+    }
 
-    return ;
+    return arrFriend;
   }
 }

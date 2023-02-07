@@ -11,3 +11,4 @@ export class CreateFriendDto {
   @IsBoolean()
   request: boolean;
 }
+

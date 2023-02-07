@@ -1,4 +1,4 @@
-import { types } from 'mobx-state-tree';
+import { flow, types } from 'mobx-state-tree';
 import { create as createHeaderStore, Store as HeaderStore } from 'application/pages/Home/Header/store';
 import { create as createSidebarStore, Store as SidebarStore } from 'application/pages/Home/Sidebar/store';
 import { create as createStoryStore, Store as StoryStore } from 'application/pages/Home/Stories/store';
@@ -12,6 +12,7 @@ import { create as createFriendsStore, Store as FriendsStore } from 'application
 export const Store = types
   .model({
     mounted: types.boolean,
+    initialized: types.boolean,
     headerStore: HeaderStore,
     sidebarStore: SidebarStore,
     storyStore: StoryStore,
@@ -21,18 +22,22 @@ export const Store = types
     profileStore: ProfileStore,
     settingsStore: SettingsStore,
     friendsStore: FriendsStore,
-
   })
   .views((self) => ({}))
 
   .actions((self) => ({
     mount: () => {
+      self.init();
       self.mounted = true;
     },
 
     unmount: () => {
       self.mounted = false;
     },
+    init: flow(function* () {
+      self.initialized = false;
+      self.initialized = true;
+    }),
   }));
 
 export function create() {
@@ -47,5 +52,6 @@ export function create() {
     profileStore: createProfileStore(),
     settingsStore: createSettingsStore(),
     friendsStore: createFriendsStore(),
+    initialized: false,
   });
 }

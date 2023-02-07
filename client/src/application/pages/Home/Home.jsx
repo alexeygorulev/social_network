@@ -10,10 +10,11 @@ import { Route, Routes } from 'react-router-dom';
 import Profile from './Profile';
 import Settings from './Settings';
 import Friends from './Friends';
+import Loader from 'application/common/Loader/Loader';
 
 const Home = (props) => {
   const { store } = props;
-  const { mounted, mount, unmount } = store;
+  const { mounted, mount, unmount, initialized } = store;
 
   useEffect(() => {
     if (!mounted) mount();
@@ -21,6 +22,7 @@ const Home = (props) => {
       if (mounted) unmount();
     };
   }, [mounted]);
+  if (!initialized) return <Loader />;
 
   if (!mounted) return null;
   const n = require('application/assets/img/defaultPhoto.jpg');

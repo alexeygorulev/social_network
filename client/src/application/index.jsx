@@ -6,18 +6,15 @@ import { configureApiInstance as configureAdminApiInstance } from '../api/networ
 
 import Application from './Application';
 import { create as createApplicationStore } from './store';
-import { CookiesProvider } from 'react-cookie';
 
 const store = createApplicationStore();
 const ApplicationWithStore = inject('store')(Application);
 function App(props) {
   const { adminApi, ...restProps } = props;
-
+  
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
     if (!mounted) {
-      configureAdminApiInstance(adminApi);
       setMounted(true);
     }
 
@@ -30,9 +27,7 @@ function App(props) {
 
   return (
     <Provider store={store}>
-      <CookiesProvider>
-        <ApplicationWithStore adminApi={adminApi} {...restProps} />
-      </CookiesProvider>
+      <ApplicationWithStore adminApi={adminApi} {...restProps} />
     </Provider>
   );
 }

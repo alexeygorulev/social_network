@@ -5,7 +5,6 @@ import { getApiInstance, getApiParams } from './index';
 const checkLogin = (data) => {
   const apiParams = getApiParams();
   const headers = {};
-  console.log(apiParams.authorizationToken);
   if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
 
   return getApiInstance()({
@@ -65,11 +64,106 @@ const getProfile = () => {
     headers,
   });
 };
+const getFriends = () => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'GET',
+    url: URLS.GET_FRIENDS_LIST,
+    headers,
+  });
+};
+const getUsers = () => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'GET',
+    url: URLS.GET_USERS_LIST,
+    headers,
+  });
+};
+const getFriendsRequests = () => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'GET',
+    url: URLS.GET_FRIENDS_REQUESTS,
+    headers,
+  });
+};
+const getFriendsAcceptList = () => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'GET',
+    url: URLS.FRIEND_ACCEPT_LIST,
+    headers,
+  });
+};
+
+const createFriendRequest = (data) => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'POST',
+    url: URLS.CREATE_FRIENDS_REQUESTS,
+    data,
+    headers,
+  });
+};
+const declineRequestFriend = (data) => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'POST',
+    url: URLS.FRIEND_DECLINE,
+    data,
+    headers,
+  });
+};
+const acceptFriend = (data) => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'POST',
+    url: URLS.FRIEND_ACCEPT,
+    data,
+    headers,
+  });
+};
 
 export default {
   checkLogin,
   addUser,
   createSetting,
   getSettingById,
-  getProfile
+  getProfile,
+  getFriends,
+  getUsers,
+  getFriendsRequests,
+  createFriendRequest,
+  acceptFriend,
+  getFriendsAcceptList,
+  declineRequestFriend,
 };

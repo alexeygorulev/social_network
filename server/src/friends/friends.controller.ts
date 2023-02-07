@@ -8,18 +8,43 @@ import { CreateFriendDto } from './dto/create-friend.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Friend } from './friends.model';
 
-@Controller()
+@Controller('/friends')
 export class FriendsController {
   constructor(private friendService: FriendsService) {}
 
-  @Post('/friend')
+  @Post()
   @UseGuards(JwtAuthGuard)
   login(@Req() req, @Body() createFriendDto: CreateFriendDto) {
     return this.friendService.requestNewFriend(createFriendDto, req.user);
+  }
+  @Post('/accept')
+  @UseGuards(JwtAuthGuard)
+  acceptNewFriend(@Req() req, @Body() createFriendDto: CreateFriendDto) {
+    return this.friendService.acceptNewFriend(createFriendDto, req.user);
   }
 
   @Get('/all')
   findAll(): Promise<Friend[]> {
     return this.friendService.findAll();
+  }
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  getFriendsList(@Req() req): Promise<Friend[]> {
+    return this.friendService.getFriendsList(req.user);
+  }
+  @Get('/requests')
+  @UseGuards(JwtAuthGuard)
+  findFriendRequest(@Req() req): Promise<Friend[]> {
+    return this.friendService.findFriendRequest(req.user);
+  }
+  @Get('/acceptsList')
+  @UseGuards(JwtAuthGuard)
+  acceptListFriends(@Req() req): Promise<Friend[]> {
+    return this.friendService.acceptListFriends(req.user);
+  }
+  @Post('/decline')
+  @UseGuards(JwtAuthGuard)
+  declineFriend(@Req() req, @Body() createFriendDto: CreateFriendDto): Promise<any> {
+    return this.friendService.declineFriend(createFriendDto, req.user);
   }
 }

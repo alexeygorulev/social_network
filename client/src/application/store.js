@@ -14,12 +14,13 @@ export const Store = types
     checkNotification: types.boolean,
     isToken: types.boolean,
     initialized: types.boolean,
+    token: types.maybeNull(types.string),
   })
   .views((self) => ({}))
   .actions((self) => ({
     mount: () => {
-      self.mounted = true;
       self.init();
+      self.mounted = true;
     },
 
     unmount: () => {
@@ -29,6 +30,7 @@ export const Store = types
       self.initialized = false;
       const cookie = new Cookies();
       const token = cookie.get('token');
+      self.token = token;
       self.isToken = false;
       if (token) self.isToken = true;
       self.initialized = true;
@@ -55,5 +57,6 @@ export function create() {
     checkNotification: false,
     isToken: false,
     initialized: false,
+    token: null,
   });
 }

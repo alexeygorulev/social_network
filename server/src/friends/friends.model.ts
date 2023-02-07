@@ -17,7 +17,7 @@ export class Friend {
   id: number;
 
   @IsString()
-  @Column({ default: true })
+  @Column()
   request: boolean;
 
   @IsString()

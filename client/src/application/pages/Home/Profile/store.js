@@ -1,5 +1,5 @@
 import { UserSettings } from 'api/network/store/profile';
-import { flow, getRoot, types } from 'mobx-state-tree';
+import { flow, getRoot, getSnapshot, types } from 'mobx-state-tree';
 
 export const Data = types.model({});
 
@@ -18,12 +18,15 @@ export const Store = types
 
   .actions((self) => ({
     mount: () => {
-      self.mounted = true;
       self.init();
+      self.mounted = true;
     },
 
     unmount: () => {
+      self.settings = null
+      self.defaultName = null
       self.mounted = false;
+
     },
     init: flow(function* init() {
       const root = getRoot(self);

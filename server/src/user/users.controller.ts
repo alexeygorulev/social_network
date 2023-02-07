@@ -14,8 +14,9 @@ export class UsersController {
   ) {}
 
   @Get()
-  findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+  @UseGuards(JwtAuthGuard)
+  findAll(@Req() req): Promise<User[]> {
+    return this.usersService.findAll(req.user.id);
   }
   @UseGuards(JwtAuthGuard)
   @Get('/profile')
