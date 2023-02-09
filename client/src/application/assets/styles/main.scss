@@ -16,6 +16,9 @@ main .container .left {
   height: max-content;
   position: sticky;
   top: $--sticky-top-left;
+  & a {
+    color: $--color-gray;
+  }
 }
 
 main .container .left .profile {

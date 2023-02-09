@@ -1,12 +1,22 @@
 import { observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 
-const FriendItem = ({ friend, isUsers, friendsRequests, createFriendRequest, friends }) => {
+const FriendItem = ({ friend, isUsers, friendsRequests, createFriendRequest, friends, getProfileFriend }) => {
   const { setting } = friend;
+  const n = require('application/assets/img/defaultPhoto.jpg');
+
   return (
     <>
       <div className="friends__item">
         <div>
-          <img src="/" alt="" />
+          <Link to={'/profile'}>
+            <img
+              style={{ cursor: 'pointer' }}
+              onClick={() => getProfileFriend(friend.id)}
+              src={friend.avatarId ? `${process.env.REACT_APP_API_URL}/database-files/${friend.avatarId}` : n}
+              alt=""
+            />
+          </Link>
         </div>
         <div className="friend__info">
           <h4>

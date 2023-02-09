@@ -1,3 +1,4 @@
+import { DatabaseModule } from './database/database.module';
 import { FriendsModule } from './friends/friends.module';
 import { SettingsModule } from './Settings/settings.module';
 import { AuthModule } from './auth/auth.module';
@@ -12,9 +13,11 @@ import { SettingsController } from './Settings/settings.controller';
 import { RequestMethod } from '@nestjs/common/enums';
 import { AuthController } from './auth/auth.controller';
 import { Friend } from './friends/friends.model';
+import DatabaseFile from './database/database.model';
 
 @Module({
   imports: [
+    DatabaseModule,
     FriendsModule,
     SettingsModule,
     AuthModule,
@@ -28,7 +31,7 @@ import { Friend } from './friends/friends.model';
       port: Number(process.env.POSTGRES_PORT),
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
-      entities: [User, Setting, Friend],
+      entities: [User, Setting, Friend, DatabaseFile],
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,

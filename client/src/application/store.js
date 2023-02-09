@@ -35,6 +35,12 @@ export const Store = types
       if (token) self.isToken = true;
       self.initialized = true;
     },
+    failedToken: () => {
+      const cookie = new Cookies();
+      cookie.remove('token');
+      window.history.replaceState([], '', process.env.REACT_APP_ADMIN_FRONT_API_URL);
+      self.isToken = false;
+    },
     createNotificationMessage: (message) => {
       self.newMessage = message;
       self.checkNotification = true;

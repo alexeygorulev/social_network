@@ -8,6 +8,7 @@ export const URLS = {
   GET_FRIENDS_LIST: '/friends',
   GET_FRIENDS: '/friends/list',
   GET_USERS_LIST: '/users',
+  CREATE_AVATAR: 'users/avatar',
   GET_FRIENDS_REQUESTS: 'friends/requests',
   CREATE_FRIENDS_REQUESTS: 'friends',
   FRIEND_ACCEPT: 'friends/accept',

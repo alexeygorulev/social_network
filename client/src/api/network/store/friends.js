@@ -18,12 +18,10 @@ export const Friend = types.model({
   email: types.maybeNull(types.string),
   ban: types.maybeNull(types.boolean),
   role: types.maybeNull(types.string),
+  avatarId: types.maybeNull(types.number),
   setting: types.maybeNull(types.array(FriendsSettings)),
 });
 
-// export const Friends = types.model({
-//   friends: types.maybeNull(types.array(Friend)),
-// });
 
 export const Store = types
   .model({
@@ -48,7 +46,6 @@ export const Store = types
       try {
         self.data.getFriends.fetch = true;
         const result = yield requests.getFriendsList(id);
-        console.log(result);
         const response = (result && result.data) || [];
         self.data.getFriends.response = response;
         self.data.getFriends.fetch = false;

@@ -14,6 +14,7 @@ export const Store = types
     counterFriends: types.number,
     requestFriends: types.maybeNull(types.array(types.string)),
     id: types.maybeNull(types.string),
+    idProfile: types.maybeNull(types.string),
   })
   .views((self) => ({
     get visibility() {
@@ -34,23 +35,31 @@ export const Store = types
 
     unmount: () => {
       self.mounted = false;
+      self.idProfile = null;
     },
     setIdFriend: (id) => {
       self.id = id;
     },
     getFriends: flow(function* getFriends() {
       const root = getRoot(self);
-      setQueryParam('id', self.id, true);
+      if (self.id) setQueryParam('id', self.id, true);
       const paramsId = window.location.search;
       const friendList = yield root.api.friendsStore.getFriends(paramsId);
       self.friends = friendList || [];
       self.counterFriends = self.friends.length;
     }),
+    getProfileFriend: flow(function* (id) {
+      const parent = getParent(self);
+      parent.profileStore.toggleOnFriendProfile();
+      parent.profileStore.setIdFriend(id);
+      yield parent.profileStore.init();
+    }),
+
     init: flow(function* init() {
       const root = getRoot(self);
-      const parent = getParent(self);
       try {
         self.initialized = false;
+        if (window.location.search !== '') return self.getFriends();
         const result = yield root.api.friendsStore.getFriendsList();
         self.friends = result || [];
         self.counterFriends = self.friends.length;
@@ -60,6 +69,9 @@ export const Store = types
         self.initialized = true;
       }
     }),
+    setIdProfile: (id) => {
+      self.idProfile = id;
+    },
     createFriendRequest: flow(function* (id) {
       self.initialized = false;
       try {
@@ -68,7 +80,7 @@ export const Store = types
           acceptUserId: id,
         };
         yield root.api.friendsStore.createFriendRequest(data);
-        self.getUsers();
+        yield self.getUsers();
       } catch (error) {
         console.log(error);
       } finally {
@@ -112,5 +124,6 @@ export function create() {
     counterFriends: 0,
     requestFriends: null,
     users: null,
+    idProfile: null,
   });
 }

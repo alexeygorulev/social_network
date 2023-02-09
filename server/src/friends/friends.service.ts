@@ -68,7 +68,6 @@ export class FriendsService {
       const friendEntity = await this.friendsRepository.findOne({
         where: { acceptUserId: acceptId, requestUserId: requestId },
       });
-      console.log(friendEntity);
 
       return await this.friendsRepository.delete(friendEntity.id);
     } catch (error) {
@@ -79,7 +78,6 @@ export class FriendsService {
   async getFriendsList(req): Promise<any> {
     try {
       let acceptId = req.id ? req.id : req;
-      console.log(acceptId);
       
       const friendEntityRequest = await this.friendsRepository.find({
         where: { request: false, requestUserId: acceptId },

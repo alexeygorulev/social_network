@@ -16,6 +16,7 @@ export const UserProfile = types.model({
   ban: types.boolean,
   email: types.maybeNull(types.string),
   login: types.maybeNull(types.string),
+  avatarId: types.maybeNull(types.number),
   id: types.maybeNull(types.string),
   settings: types.maybeNull(types.array(UserSettings)),
 });
@@ -29,11 +30,11 @@ export const Store = types
   .actions((self) => ({
     getUserProfile: flow(function* getUserProfile() {
       try {
-        self.data.getProfile.fetch = true
+        self.data.getProfile.fetch = true;
         const result = yield requests.getProfile();
         const response = (result && result.data) || [];
-        self.data.getProfile.response = response
-        self.data.getProfile.fetch = false
+        self.data.getProfile.response = response;
+        self.data.getProfile.fetch = false;
         return response;
       } catch (error) {
         throw error;
@@ -41,12 +42,22 @@ export const Store = types
     }),
     getFriendProfile: flow(function* getFriendProfile(id) {
       try {
-        self.data.getProfile.fetch = true
+        self.data.getProfile.fetch = true;
         const result = yield requests.getFriendProfile(id);
         const response = (result && result.data) || [];
-        self.data.getProfile.response = response
-        self.data.getProfile.fetch = false
+        self.data.getProfile.response = response;
+        self.data.getProfile.fetch = false;
         return response;
+      } catch (error) {
+        throw error;
+      }
+    }),
+    createAvatar: flow(function* createAvatar(data) {
+      try {
+        self.data.getProfile.fetch = true;
+        const result = yield requests.createAvatar(data);
+        self.data.getProfile.fetch = false;
+        return result;
       } catch (error) {
         throw error;
       }

@@ -8,14 +8,26 @@ https://docs.nestjs.com/providers#services
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm/repository/Repository';
 import { Friend } from 'src/friends/friends.model';
+import { DatabaseFilesService } from 'src/database/database.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    private readonly databaseFilesService: DatabaseFilesService,
   ) {}
 
+  async addAvatar(userId: number, imageBuffer: Buffer, filename: string) {
+    const avatar = await this.databaseFilesService.uploadDatabaseFile(
+      imageBuffer,
+      filename,
+    );
+    await this.usersRepository.update(userId, {
+      avatarId: avatar.id,
+    });
+    return avatar;
+  }
   createUser(createUserDto: CreateUserDto): Promise<User> {
     const user = new User();
     user.login = createUserDto.login;

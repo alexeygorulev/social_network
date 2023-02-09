@@ -9,9 +9,8 @@ import './friends-slider.scss';
 
 import { Pagination } from 'swiper';
 import { getSnapshot } from 'mobx-state-tree';
-const Friend = ({ friends, getFriendProfile }) => {
+const Friend = ({ friends, getFriendProfile, avatarId }) => {
   const n = require('application/assets/img/defaultPhoto.jpg');
-  console.log(friends.map(item => getSnapshot(item.setting)));
   return (
     <>
       <Swiper
@@ -25,7 +24,12 @@ const Friend = ({ friends, getFriendProfile }) => {
         {friends.map((item, index) => (
           <SwiperSlide key={index}>
             <div slot="container-start" className="friend">
-              <img style={{ cursor: 'pointer' }} onClick={() => getFriendProfile(item.id)} src={n} alt="" />
+              <img
+                style={{ cursor: 'pointer' }}
+                onClick={() => getFriendProfile(item.id)}
+                src={item.avatarId ? `${process.env.REACT_APP_API_URL}/database-files/${item.avatarId}` : n}
+                alt=""
+              />
               <span className="text-muted">
                 {!item?.setting[0]?.name || !item?.setting[0]?.lastName
                   ? item.login

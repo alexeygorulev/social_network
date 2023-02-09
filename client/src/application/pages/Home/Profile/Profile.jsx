@@ -9,15 +9,41 @@ import Friend from './Item/Friend';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+import UploadPopup from './Popup/UploadPopup';
 
 const Profile = (props) => {
   const { store } = props;
-  const { mounted, mount, unmount, initialized, profileData, defaultName, friends, getFriendProfile, getListFriend } =
-    store;
+  const {
+    mounted,
+    mount,
+    unmount,
+    initialized,
+    profileData,
+    defaultName,
+    friends,
+    getFriendProfile,
+    getListFriend,
+    isUploadPhoto,
+    createAvatar,
+    avatarId,
+    toggleUpload,
+    isMyProfile,
+  } = store;
   const [isActive, setIsActive] = useState(false);
+  const [origimg, setOrigimg] = useState('');
+  const [file, setFile] = useState();
+  const [origimgFile, setOrigimgFile] = useState('');
+
+  useEffect(() => {
+    if (!isMyProfile) setIsActive(false);
+    return () => {
+      if (!isMyProfile) setIsActive(false);
+    };
+  }, [isMyProfile]);
 
   useEffect(() => {
     if (!mounted) mount();
+
     return () => {
       if (mounted) unmount();
     };
@@ -26,17 +52,54 @@ const Profile = (props) => {
   if (!initialized) return <Loader />;
 
   if (!mounted) return null;
+  const openPopup = () => {
+    setIsActive(!isActive);
+    toggleUpload();
+  };
+  const handle = (e) => {
+    const { files } = e.target;
+    if (files && files.length !== 0) {
+      setFile(files[0]);
+    }
+    const imgFile = e.target.files[0];
+    setOrigimg(imgFile);
 
+    setOrigimgFile(URL.createObjectURL(imgFile));
+  };
+
+  const handleUpload = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const formData = new FormData();
+    formData.append('file', file);
+    await createAvatar(formData);
+    toggleUpload();
+  };
+  const checkMyProfile = () => {
+    if (!isMyProfile) return setIsActive(false);
+    setIsActive(!isActive);
+  };
   const n = require('application/assets/img/defaultPhoto.jpg');
   return (
     <>
       <div className="container__profile">
+        {isUploadPhoto && (
+          <UploadPopup toggleUpload={toggleUpload} handleUpload={handleUpload} handle={handle} origimgFile={origimgFile} avatarId={avatarId} />
+        )}
         <div className="detail__wrapper">
           <div className="photo__wrapper">
             <div className="photo-profile">
               <div className={`menu ${isActive ? 'active' : ''}`}>
-                <div onClick={() => setIsActive(!isActive)} className={`toggle `}>
-                  <img className="photo" src={n} alt="" />
+                <div
+                  onClick={() => checkMyProfile()}
+                  style={{ cursor: `${isMyProfile ? 'pointer' : 'default'}` }}
+                  className={`toggle`}
+                >
+                  <img
+                    className="photo"
+                    src={avatarId ? `${process.env.REACT_APP_API_URL}/database-files/${avatarId}` : n}
+                    alt=""
+                  />
                   <span className="time-ago">12 min ago</span>
                 </div>
                 <li style={{ '--igs': 1 }}>
@@ -54,8 +117,8 @@ const Profile = (props) => {
                     <i className="uil uil-video"></i>
                   </Link>
                 </li>
-                <li style={{ '--igs': 4 }}>
-                  <Link to="/upload">
+                <li onClick={openPopup} style={{ '--igs': 4 }}>
+                  <Link>
                     <i className="uil uil-import"></i>
                   </Link>
                 </li>
@@ -88,7 +151,7 @@ const Profile = (props) => {
             </Link>
           </p>
           <div className="friends">
-            <Friend friends={friends} getFriendProfile={getFriendProfile} />
+            <Friend avatarId={avatarId} friends={friends} getFriendProfile={getFriendProfile} />
           </div>
         </div>
         {/* MUSIC */}

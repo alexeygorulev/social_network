@@ -6,7 +6,7 @@ export const LIST_ITEMS = [
     url: '/profile',
   },
   {
-    title: 'Friends',
+    title: 'My Friends',
     icons: 'uil uil-users-alt',
     isActive: false,
     url: '/friends',

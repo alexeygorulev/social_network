@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import DatabaseFile from 'src/database/database.model';
 import { Friend } from 'src/friends/friends.model';
 import { Setting } from 'src/Settings/settings.model';
 import {
@@ -8,6 +9,8 @@ import {
   OneToMany,
   ManyToMany,
   JoinTable,
+  JoinColumn,
+  OneToOne,
 } from 'typeorm';
 export type UserRoleType = 'admin' | 'editor' | 'guest';
 
@@ -43,8 +46,15 @@ export class User {
   @OneToMany(() => Setting, (setting) => setting.user)
   setting: Setting;
 
+  @JoinColumn({ name: 'avatarId' })
+  @OneToOne(() => DatabaseFile, {
+    nullable: true,
+  })
+  public avatar?: DatabaseFile;
+
+  @Column({ nullable: true })
+  public avatarId?: number;
+
   @OneToMany(() => Friend, (friend) => friend.user)
   friend: Friend[];
-
-
 }

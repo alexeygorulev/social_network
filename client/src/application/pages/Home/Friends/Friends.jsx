@@ -20,6 +20,7 @@ const Friends = (props) => {
     friendsRequests,
     createFriendRequest,
     friends,
+    getProfileFriend,
   } = store;
 
   useEffect(() => {
@@ -45,7 +46,10 @@ const Friends = (props) => {
         </div>
         {visibility.friendsList && (
           <div className="friends__list">
-            {friends && friends.map((item) => <FriendItem key={item.id} friend={item} isUsers={isUsers} />)}
+            {friends &&
+              friends.map((item) => (
+                <FriendItem key={item.id} friend={item} isUsers={isUsers} getProfileFriend={getProfileFriend} />
+              ))}
           </div>
         )}
         {visibility.allUsers && (
@@ -59,6 +63,7 @@ const Friends = (props) => {
                   isUsers={isUsers}
                   friendsRequests={friendsRequests}
                   createFriendRequest={createFriendRequest}
+                  getProfileFriend={getProfileFriend}
                 />
               ))}
           </div>

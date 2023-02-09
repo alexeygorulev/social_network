@@ -150,6 +150,19 @@ const createFriendRequest = (data) => {
     headers,
   });
 };
+const createAvatar = (data) => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'POST',
+    url: URLS.CREATE_AVATAR,
+    data,
+    headers,
+  });
+};
 const declineRequestFriend = (data) => {
   const apiParams = getApiParams();
   const headers = {};
@@ -191,5 +204,6 @@ export default {
   getFriendsAcceptList,
   declineRequestFriend,
   getFriendProfile,
-  getFriendsList
+  getFriendsList,
+  createAvatar,
 };

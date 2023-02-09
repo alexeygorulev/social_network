@@ -55,7 +55,7 @@ export const Store = types
         self.getProfile();
         
       }
-      if (title === 'Friends') {
+      if (title === 'My Friends') {
         parent.friendsStore.init()
         parent.profileStore.toggleOnMyProfile()
 

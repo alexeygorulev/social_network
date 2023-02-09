@@ -1,4 +1,4 @@
-import {  types } from 'mobx-state-tree';
+import { flow, types } from 'mobx-state-tree';
 import { create as createHeaderStore, Store as HeaderStore } from 'application/pages/Home/Header/store';
 import { create as createSidebarStore, Store as SidebarStore } from 'application/pages/Home/Sidebar/store';
 import { create as createStoryStore, Store as StoryStore } from 'application/pages/Home/Stories/store';
@@ -8,6 +8,8 @@ import { create as createRequestStore, Store as RequestStore } from 'application
 import { create as createProfileStore, Store as ProfileStore } from 'application/pages/Home/Profile/store';
 import { create as createSettingsStore, Store as SettingsStore } from 'application/pages/Home/Settings/store';
 import { create as createFriendsStore, Store as FriendsStore } from 'application/pages/Home/Friends/store';
+import { create as createMusicStore, Store as MusicStore } from 'application/pages/Home/Music/store';
+import { changeQueryParams } from 'api/utils';
 
 export const Store = types
   .model({
@@ -22,6 +24,7 @@ export const Store = types
     profileStore: ProfileStore,
     settingsStore: SettingsStore,
     friendsStore: FriendsStore,
+    musicStore: MusicStore,
   })
   .views((self) => ({}))
 
@@ -38,6 +41,11 @@ export const Store = types
       self.initialized = false;
       self.initialized = true;
     },
+    switchToProfile: flow(function* () {
+      changeQueryParams([], true)
+      self.profileStore.toggleOnMyProfile()
+      yield self.profileStore.init();
+    }),
   }));
 
 export function create() {
@@ -52,6 +60,7 @@ export function create() {
     profileStore: createProfileStore(),
     settingsStore: createSettingsStore(),
     friendsStore: createFriendsStore(),
+    musicStore: createMusicStore(),
     initialized: false,
   });
 }
