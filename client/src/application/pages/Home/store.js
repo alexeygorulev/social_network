@@ -9,6 +9,7 @@ import { create as createProfileStore, Store as ProfileStore } from 'application
 import { create as createSettingsStore, Store as SettingsStore } from 'application/pages/Home/Settings/store';
 import { create as createFriendsStore, Store as FriendsStore } from 'application/pages/Home/Friends/store';
 import { create as createMusicStore, Store as MusicStore } from 'application/pages/Home/Music/store';
+import { create as createVideoStore, Store as VideoStore } from 'application/pages/Home/Videos/store';
 import { changeQueryParams } from 'api/utils';
 
 export const Store = types
@@ -25,6 +26,7 @@ export const Store = types
     settingsStore: SettingsStore,
     friendsStore: FriendsStore,
     musicStore: MusicStore,
+    videoStore: VideoStore,
   })
   .views((self) => ({}))
 
@@ -42,8 +44,8 @@ export const Store = types
       self.initialized = true;
     },
     switchToProfile: flow(function* () {
-      changeQueryParams([], true)
-      self.profileStore.toggleOnMyProfile()
+      changeQueryParams([], true);
+      self.profileStore.toggleOnMyProfile();
       yield self.profileStore.init();
     }),
   }));
@@ -61,6 +63,7 @@ export function create() {
     settingsStore: createSettingsStore(),
     friendsStore: createFriendsStore(),
     musicStore: createMusicStore(),
+    videoStore: createVideoStore(),
     initialized: false,
   });
 }

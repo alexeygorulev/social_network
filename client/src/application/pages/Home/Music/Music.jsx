@@ -9,7 +9,6 @@ const Music = (props) => {
   const { store } = props;
   const { mounted, mount, unmount } = store;
 
-
   useEffect(() => {
     if (!mounted) mount();
     return () => {
@@ -17,12 +16,10 @@ const Music = (props) => {
     };
   }, [mounted]);
 
-
   if (!mounted) return null;
 
   return (
     <div>
-
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 
 const UploadPopup = (props) => {
-  const { handle, handleUpload, origimgFile, avatarId, toggleUpload } = props;
+  const { handle, handleUpload, origimgFile, avatarId, toggleUpload, isVideo } = props;
   const n = require('application/assets/img/defaultPhoto.jpg');
 
   return (
@@ -14,14 +14,17 @@ const UploadPopup = (props) => {
             <i style={{ cursor: 'pointer' }} onClick={() => toggleUpload()} className="uil uil-times-circle"></i>
           </div>
           <h4 style={{ textAlign: 'center', paddingBottom: 20 }} className="text-muter">
-            Обновить фотографию
+            {isVideo ? 'Загрузить видео' : 'Обновить фотографию'}
           </h4>
           <form>
             <div className="popup-photo__container">
-              <img
-                src={origimgFile ? origimgFile : n }
-                alt=""
-              />
+              {!isVideo ? (
+                <img src={origimgFile ? origimgFile : n} />
+              ) : (
+                <div className="video__upload">
+                  <video src="http://localhost:3001/videos/regist.mp4"></video>
+                </div>
+              )}
             </div>
             <div style={{ textAlign: 'center' }}>
               <input

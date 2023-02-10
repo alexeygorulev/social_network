@@ -295,6 +295,8 @@
   padding: 20px;
 }
 .popup-photo__container {
+  display: flex;
+  align-items: center;
   width: 460px;
   height: 470px;
   padding-bottom: 20px;

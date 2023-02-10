@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import { useEffect,  } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Item from './Item/Item';
 
@@ -19,7 +19,7 @@ const Sidebar = (props) => {
     <>
       <div className="sidebar">
         {listItems.map((item) => (
-          <Item  key={item.title} item={item} changeClassOnActive={changeClassOnActive} />
+          <Item key={item.title} item={item} changeClassOnActive={changeClassOnActive} />
         ))}
       </div>
     </>

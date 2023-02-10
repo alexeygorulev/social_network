@@ -22,7 +22,7 @@ const Friend = ({ friends, getFriendProfile, avatarId }) => {
         modules={[Pagination]}
       >
         {friends.map((item, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide  key={index}>
             <div slot="container-start" className="friend">
               <img
                 style={{ cursor: 'pointer' }}

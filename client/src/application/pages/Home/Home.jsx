@@ -12,6 +12,7 @@ import Settings from './Settings';
 import Friends from './Friends';
 import Loader from 'application/common/Loader/Loader';
 import Music from './Music';
+import Videos from './Videos';
 
 const Home = (props) => {
   const { store } = props;
@@ -53,6 +54,7 @@ const Home = (props) => {
               <Route path="/settings" element={<Settings />} />
               <Route path="/music" element={<Music />} />
               <Route path="/friends" element={<Friends />} />
+              <Route path="/videos" element={<Videos />} />
             </Routes>
           </div>
           <div className="right">

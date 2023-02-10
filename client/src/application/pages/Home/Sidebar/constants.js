@@ -35,7 +35,7 @@ export const LIST_ITEMS = [
     title: 'Videos',
     icons: 'uil uil-envelope',
     isActive: false,
-    url: '/video',
+    url: '/videos',
   },
   {
     title: 'Settings',

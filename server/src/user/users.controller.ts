@@ -13,17 +13,29 @@ import {
   Post,
   UseInterceptors,
   UploadedFile,
+  StreamableFile,
+  Res,
+  Header,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
-
+import { createReadStream } from 'fs';
+import { join } from 'path';
 
 @ApiTags('Получение пользователей')
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
+
+  @Get('file')
+  @Header('Content-Type', 'image')
+  @Header('Content-Disposition', 'inline; filename="feed-2.jpg"')
+  getStaticFile(): StreamableFile {
+    const file = createReadStream(join(process.cwd(), 'src/assets/feed-2.jpg'));
+    return new StreamableFile(file);
+  }
 
   @Get()
   @UseGuards(JwtAuthGuard)

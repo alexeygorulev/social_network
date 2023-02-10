@@ -1,3 +1,4 @@
+import { VideosModule } from './video/videos.module';
 import { DatabaseModule } from './database/database.module';
 import { FriendsModule } from './friends/friends.module';
 import { SettingsModule } from './Settings/settings.module';
@@ -14,9 +15,11 @@ import { RequestMethod } from '@nestjs/common/enums';
 import { AuthController } from './auth/auth.controller';
 import { Friend } from './friends/friends.model';
 import DatabaseFile from './database/database.model';
+import { VideosFile } from './video/videos.model';
 
 @Module({
   imports: [
+    VideosModule,
     DatabaseModule,
     FriendsModule,
     SettingsModule,
@@ -31,7 +34,7 @@ import DatabaseFile from './database/database.model';
       port: Number(process.env.POSTGRES_PORT),
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
-      entities: [User, Setting, Friend, DatabaseFile],
+      entities: [User, Setting, Friend, DatabaseFile, VideosFile],
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,

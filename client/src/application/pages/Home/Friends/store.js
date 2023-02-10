@@ -47,6 +47,7 @@ export const Store = types
       const friendList = yield root.api.friendsStore.getFriends(paramsId);
       self.friends = friendList || [];
       self.counterFriends = self.friends.length;
+      self.initialized = true
     }),
     getProfileFriend: flow(function* (id) {
       const parent = getParent(self);
