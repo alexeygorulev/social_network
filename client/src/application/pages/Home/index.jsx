@@ -7,7 +7,6 @@ import Component from './Home';
 function Module(props) {
   const { store } = props;
   const { homeStore } = store;
-
   return <Component {...props} store={homeStore} />;
 }
 

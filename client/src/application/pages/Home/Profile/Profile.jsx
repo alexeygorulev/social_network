@@ -9,7 +9,7 @@ import Friend from './Item/Friend';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import UploadPopup from './Popup/UploadPopup';
+import UploadPopup from '../../../common/Popup/UploadPopup';
 
 const Profile = (props) => {
   const { store } = props;

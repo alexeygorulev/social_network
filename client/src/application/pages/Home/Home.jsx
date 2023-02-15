@@ -13,10 +13,11 @@ import Friends from './Friends';
 import Loader from 'application/common/Loader/Loader';
 import Music from './Music';
 import Videos from './Videos';
+import Loading from 'application/common/Pagination';
 
 const Home = (props) => {
   const { store } = props;
-  const { mounted, mount, unmount, initialized, switchToProfile } = store;
+  const { mounted, mount, unmount, initialized, switchToProfile, loadingStore, rightNotification } = store;
 
   useEffect(() => {
     if (!mounted) mount();
@@ -57,12 +58,15 @@ const Home = (props) => {
               <Route path="/videos" element={<Videos />} />
             </Routes>
           </div>
-          <div className="right">
-            <Messages />
-            <Requests />
-          </div>
+          {rightNotification && (
+            <div  className="right">
+              <Messages />
+              <Requests />
+            </div>
+          )}
         </div>
       </main>
+      <Loading store={loadingStore} />
     </div>
   );
 };

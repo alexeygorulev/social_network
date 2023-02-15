@@ -189,7 +189,32 @@ const acceptFriend = (data) => {
     headers,
   });
 };
+const getAllVideos = (params) => {
+  const apiParams = getApiParams();
+  const headers = {};
 
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'GET',
+    url: URLS.GET_ALL_VIDEOS,
+    headers,
+    params,
+  });
+};
+const createVideo = (data) => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'POST',
+    url: URLS.CREATE_VIDEO,
+    data,
+    headers,
+  });
+};
 export default {
   checkLogin,
   addUser,
@@ -206,4 +231,6 @@ export default {
   getFriendProfile,
   getFriendsList,
   createAvatar,
+  getAllVideos,
+  createVideo,
 };

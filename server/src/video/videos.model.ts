@@ -7,4 +7,7 @@ export class VideosFile {
 
   @Column({ type: 'varchar' })
   filename: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  videoName: string;
 }

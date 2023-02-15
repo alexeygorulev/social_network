@@ -6,6 +6,11 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { VideosFile } from './videos.model';
+import {
+  paginate,
+  Pagination,
+  IPaginationOptions,
+} from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class VideosService {
@@ -34,5 +39,15 @@ export class VideosService {
       throw new NotFoundException();
     }
     return file;
+  }
+
+  async getAllVideo() {
+    return await this.videosRepository.find();
+  }
+
+  async paginate(options: IPaginationOptions): Promise<Pagination<VideosFile>> {
+    const allVideo = await this.videosRepository.createQueryBuilder('c')
+    allVideo.orderBy("id", "DESC")
+    return paginate<VideosFile>(allVideo, options);
   }
 }

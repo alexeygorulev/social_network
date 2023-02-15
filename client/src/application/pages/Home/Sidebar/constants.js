@@ -27,13 +27,13 @@ export const LIST_ITEMS = [
   },
   {
     title: 'Music',
-    icons: 'uil uil-envelope',
+    icons: 'uil uil-music',
     isActive: false,
     url: '/music',
   },
   {
     title: 'Videos',
-    icons: 'uil uil-envelope',
+    icons: 'uil uil-video',
     isActive: false,
     url: '/videos',
   },

@@ -14,4 +14,6 @@ export const URLS = {
   FRIEND_ACCEPT: 'friends/accept',
   FRIEND_DECLINE: 'friends/decline',
   FRIEND_ACCEPT_LIST: 'friends/acceptsList',
+  GET_ALL_VIDEOS: 'videos/all',
+  CREATE_VIDEO: 'videos/add',
 };

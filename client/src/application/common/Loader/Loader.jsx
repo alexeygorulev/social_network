@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
-import s from './Loader.module.scss'
-const Loader = () => {
+import s from './Loader.module.scss';
+const Loader = (props) => {
   return (
     <div className={s.wrapperCenter}>
       <input type="checkbox" id="check" />

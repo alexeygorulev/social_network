@@ -10,6 +10,7 @@ import { create as createSettingsStore, Store as SettingsStore } from 'applicati
 import { create as createFriendsStore, Store as FriendsStore } from 'application/pages/Home/Friends/store';
 import { create as createMusicStore, Store as MusicStore } from 'application/pages/Home/Music/store';
 import { create as createVideoStore, Store as VideoStore } from 'application/pages/Home/Videos/store';
+import { create as createLoadingStore, Store as LoadingStore } from 'application/common/Pagination/store';
 import { changeQueryParams } from 'api/utils';
 
 export const Store = types
@@ -27,6 +28,8 @@ export const Store = types
     friendsStore: FriendsStore,
     musicStore: MusicStore,
     videoStore: VideoStore,
+    loadingStore: LoadingStore,
+    rightNotification: types.boolean
   })
   .views((self) => ({}))
 
@@ -42,6 +45,9 @@ export const Store = types
     init: () => {
       self.initialized = false;
       self.initialized = true;
+    },
+    toggleRightNotification: (status) => {
+      self.rightNotification = status
     },
     switchToProfile: flow(function* () {
       changeQueryParams([], true);
@@ -64,6 +70,8 @@ export function create() {
     friendsStore: createFriendsStore(),
     musicStore: createMusicStore(),
     videoStore: createVideoStore(),
+    loadingStore: createLoadingStore(),
     initialized: false,
+    rightNotification: true
   });
 }
