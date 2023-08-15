@@ -59,6 +59,7 @@ const Profile = (props) => {
   const handle = (e) => {
     const { files } = e.target;
     if (files && files.length !== 0) {
+      console.log(files[0]);
       setFile(files[0]);
     }
     const imgFile = e.target.files[0];
@@ -71,6 +72,7 @@ const Profile = (props) => {
     event.preventDefault();
     event.stopPropagation();
     const formData = new FormData();
+    console.log(file);
     formData.append('file', file);
     await createAvatar(formData);
     toggleUpload();
@@ -84,7 +86,13 @@ const Profile = (props) => {
     <>
       <div className="container__profile">
         {isUploadPhoto && (
-          <UploadPopup toggleUpload={toggleUpload} handleUpload={handleUpload} handle={handle} origimgFile={origimgFile} avatarId={avatarId} />
+          <UploadPopup
+            toggleUpload={toggleUpload}
+            handleUpload={handleUpload}
+            handle={handle}
+            origimgFile={origimgFile}
+            avatarId={avatarId}
+          />
         )}
         <div className="detail__wrapper">
           <div className="photo__wrapper">

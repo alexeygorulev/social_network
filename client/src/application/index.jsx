@@ -11,7 +11,7 @@ const store = createApplicationStore();
 const ApplicationWithStore = inject('store')(Application);
 function App(props) {
   const { adminApi, ...restProps } = props;
-  
+
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     if (!mounted) {

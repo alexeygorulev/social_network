@@ -3,98 +3,101 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import UploadPopup from '../../../common/Popup/UploadPopup';
 import VideoItems from './Item/VideoItem';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
+import VideoPlayer from './VideoPlayer';
 import Loader from 'application/common/Loader/Loader';
+import FileUploader from 'application/common/FileUploader';
+
 const Videos = (props) => {
   const { store } = props;
-  const { mounted, mount, unmount, videoList, initialized, loading, createVideo } = store;
+  const {
+    mounted,
+    mount,
+    unmount,
+    videoList,
+    initialized,
+    loading,
+    createVideo,
+    onClickVideo,
+    filename,
+    closeVideoFromUrl,
+    videoFromUrl,
+    checkIsLoaded,
+    init,
+    addVideoById,
+    checkOnAddedVideo,
+    isAdded,
+    isMyVideos,
+  } = store;
 
   const [isOpenPopup, setIsOpenPopup] = useState(false);
   const [isWatching, setIsWatching] = useState(false);
-  const [isActive, setIsActive] = useState(true);
 
   const [file, setFile] = useState();
   const [origVideoFile, setOrigVideoFile] = useState('');
 
+  const isOpenVideoPlayer = isWatching || videoFromUrl;
+
   const toggleUpload = () => {
     setIsOpenPopup(!isOpenPopup);
   };
+  document.body.classList.toggle('popup-open', isOpenPopup || isOpenVideoPlayer);
 
-  const toWatchVideo = () => {
+  const toWatchVideo = (id) => {
+    onClickVideo(id);
     setIsWatching(true);
   };
-  const handle = (e) => {
-    const { files } = e.target;
-    if (files && files.length !== 0) {
-      setFile(files[0]);
-    }
-    const imgFile = e.target.files[0];
 
-    setOrigVideoFile(URL.createObjectURL(imgFile));
+  const handleSubmit = async () => {
+    setIsOpenPopup(false);
+    await init();
   };
 
-  const handleUpload = async (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    const formData = new FormData();
-    formData.append('video', file);
-    await createVideo(formData);
-    toggleUpload();
-  };
   useEffect(() => {
     if (!mounted) mount();
     return () => {
       if (mounted) unmount();
     };
   }, [mounted]);
+
   if (!initialized) return <Loader />;
 
   if (!mounted) return null;
   return (
-    <div className="videos__page">
+    <div className="videos__page ">
       {isOpenPopup && (
-        <UploadPopup
-          handleUpload={handleUpload}
-          origVideoFile={origVideoFile}
-          handle={handle}
-          toggleUpload={toggleUpload}
-          isVideo
+        <FileUploader
+          handleSubmit={handleSubmit}
+          createVideo={createVideo}
+          type="isVideo"
+          closeUploader={() => setIsOpenPopup(false)}
         />
       )}
-      {isWatching && (
-        <div className="container-popup">
-          <div className="popup__box_video">
-            <div style={{ textAlign: 'right' }}>
-              <i
-                style={{ cursor: 'pointer' }}
-                onClick={() => setIsWatching(false)}
-                className="uil uil-times-circle"
-              ></i>
-            </div>
-            <div className="video__block">
-              <video src="http://localhost:3001/videos/regist.mp4"></video>
-            </div>
-            <div className="description">
-              <span>Название видео</span>
-            </div>
-          </div>
-        </div>
+      {isOpenVideoPlayer && (
+        <VideoPlayer
+          filename={filename}
+          setIsWatching={setIsWatching}
+          closeVideoFromUrl={closeVideoFromUrl}
+          addVideo={addVideoById}
+          checkOnAddedVideo={checkOnAddedVideo}
+          isAdded={isAdded}
+        />
       )}
-      
       <div className="videos__wrapper">
         <div className="video__info">
           <div>
-            <span>Мои видеозаписи</span>
-            <span>Все видеозаписи</span>
+            <span onClick={isMyVideos}>Мои видеозаписи</span> |<span>Все видеозаписи</span>
           </div>
           <div>
             <span onClick={toggleUpload}>Загрузить</span>
           </div>
         </div>
         <div className="video__list">
-          <VideoItems videos={videoList} toWatchVideo={toWatchVideo} />
+          <VideoItems
+            checkIsLoaded={checkIsLoaded}
+            onClick={onClickVideo}
+            videos={videoList}
+            toWatchVideo={toWatchVideo}
+          />
         </div>
         {loading && (
           <div style={{ marginTop: 20 }}>

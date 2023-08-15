@@ -11,12 +11,14 @@ import {
   Pagination,
   IPaginationOptions,
 } from 'nestjs-typeorm-paginate';
+import { UsersService } from 'src/user/users.service';
 
 @Injectable()
 export class VideosService {
   constructor(
     @InjectRepository(VideosFile)
     private videosRepository: Repository<VideosFile>,
+    private usersService: UsersService,
   ) {}
   async uploadDatabaseFile(filename: string) {
     const newFile = await this.videosRepository.create({
@@ -46,8 +48,20 @@ export class VideosService {
   }
 
   async paginate(options: IPaginationOptions): Promise<Pagination<VideosFile>> {
-    const allVideo = await this.videosRepository.createQueryBuilder('c')
-    allVideo.orderBy("id", "DESC")
+    const allVideo = await this.videosRepository.createQueryBuilder('c');
+    allVideo.orderBy('id', 'DESC');
+    return paginate<VideosFile>(allVideo, options);
+  }
+
+  async paginateMyVideos(id: string, options: IPaginationOptions) {
+    const userVideo = await this.usersService.getPaginateVideo(id);
+    const videosIds = userVideo.videosFile.map((item) => item.id);
+
+    const allVideo = await this.videosRepository
+      .createQueryBuilder('videosFile')
+      .where('videosFile.id IN (:...videosIds)', { videosIds });
+    allVideo.orderBy('id', 'DESC');
+
     return paginate<VideosFile>(allVideo, options);
   }
 }

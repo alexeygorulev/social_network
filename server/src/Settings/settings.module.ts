@@ -4,7 +4,7 @@ import { SettingsController } from './settings.controller';
 https://docs.nestjs.com/modules
 */
 
-import {  Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { UsersModule } from 'src/user/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/user/users.model';
@@ -16,7 +16,7 @@ import { forwardRef } from '@nestjs/common/utils';
   imports: [
     TypeOrmModule.forFeature([User, Setting]),
     forwardRef(() => UsersModule),
-    AuthModule,
+    forwardRef(() => AuthModule),
   ],
   controllers: [SettingsController],
   providers: [SettingsService],

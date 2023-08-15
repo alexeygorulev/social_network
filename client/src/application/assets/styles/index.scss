@@ -69,7 +69,8 @@ body {
   font-family: 'Poppins', sans-serif;
   color: $--color-dark;
   overflow-x: hidden;
-  background: $--color-light;
+  background: rgb(39, 6, 37);
+  background: linear-gradient(169deg, rgba(39, 6, 37, 1) 0%, rgba(13, 16, 60, 1) 0%);
 }
 ul[class],
 ol[class] {
@@ -113,8 +114,7 @@ select {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 20px;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {
@@ -137,53 +137,24 @@ select {
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .container {
-    width: 96%;
-  }
-  main .container {
-    grid-template-columns: 5rem auto 30vw;
-    gap: 1rem;
-  }
-
-  .left {
-    width: 5rem;
-    z-index: 5;
-  }
-
-  main .container .left .profile {
-    display: none;
-  }
-  .sidebar h3 {
-    display: none;
-  }
-  .left .btn {
-    display: none;
-  }
-}
-
 @media screen and (max-width: 992px) {
   nav .search-bar {
     display: none;
   }
-  main .container {
+  main .container__wrap {
     grid-template-columns: 0 auto 5rem;
     gap: 0;
   }
-  main .container .left {
-    grid-column: 3/4;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-  }
+
   .notifications-popup {
     width: 20rem;
   }
 
-  main .container .middle {
-    grid-column: 1/3;
+  main .container__wrap .middle {
+    width: 800px;
   }
-  main .container .right {
+  main .container__wrap .right {
+    width: 200px;
     display: none;
   }
 }

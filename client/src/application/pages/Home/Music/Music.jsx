@@ -1,14 +1,11 @@
 import { observer } from 'mobx-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import Cookies from 'react-cookie/cjs/Cookies';
 
 const Music = (props) => {
   const { store } = props;
-  const { mounted, mount, unmount } = store;
-
+  const { mounted, mount, unmount, kek, file } = store;
+  console.log(file);
   useEffect(() => {
     if (!mounted) mount();
     return () => {
@@ -20,6 +17,8 @@ const Music = (props) => {
 
   return (
     <div>
+      <button onClick={kek}>1231323</button>
+      <video src={file ? URL.createObjectURL(file) : null}></video>
     </div>
   );
 };

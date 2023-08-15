@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import DatabaseFile from 'src/database/database.model';
 import { Friend } from 'src/friends/friends.model';
 import { Setting } from 'src/Settings/settings.model';
+import { VideosFile } from 'src/video/videos.model';
 import {
   Entity,
   Column,
@@ -57,4 +58,8 @@ export class User {
 
   @OneToMany(() => Friend, (friend) => friend.user)
   friend: Friend[];
+
+  @ManyToMany(() => VideosFile)
+  @JoinTable()
+  videosFile: VideosFile[];
 }

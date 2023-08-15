@@ -30,9 +30,7 @@ function Application(props) {
   if (!initialized) return <Loader />;
   if (isToken) {
     return (
-      <LayoutHome>
         <Home />
-      </LayoutHome>
     );
   } else {
     return (

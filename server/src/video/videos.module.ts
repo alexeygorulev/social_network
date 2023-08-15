@@ -1,20 +1,17 @@
 import { VideosService } from './videos.service';
 import { VideosController } from './videos.controller';
-/*
-https://docs.nestjs.com/modules
-*/
 
-import { Module } from '@nestjs/common';
-import { MulterModule } from '@nestjs/platform-express';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { VideosFile } from './videos.model';
+import { AuthModule } from 'src/auth/auth.module';
+import { UsersModule } from 'src/user/users.module';
 
 @Module({
   imports: [
-    MulterModule.register({
-      dest: './upload',
-    }),
     TypeOrmModule.forFeature([VideosFile]),
+    forwardRef(() => AuthModule),
+    UsersModule,
   ],
   controllers: [VideosController],
   providers: [VideosService],

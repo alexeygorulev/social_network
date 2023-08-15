@@ -3,6 +3,7 @@ https://docs.nestjs.com/controllers#controllers
 */
 
 import {
+  Body,
   Controller,
   DefaultValuePipe,
   Get,
@@ -29,31 +30,30 @@ import { VideosService } from './videos.service';
 import { Response } from 'express';
 import { VideosFile } from './videos.model';
 import { Pagination } from 'nestjs-typeorm-paginate/dist/pagination';
+import { UsersService } from 'src/user/users.service';
 
 @Controller('videos')
 export class VideosController {
-  constructor(private videosService: VideosService) {}
+  constructor(
+    private videosService: VideosService,
+    private usersService: UsersService,
+  ) {}
 
-  // @Get(':id')
-  // async getStaticFile(
-  //   @Param('id', ParseIntPipe) id: number,
-  //   @Res({ passthrough: true }) response: Response,
-  // ): Promise<StreamableFile> {
-  //   const entity = await this.videosService.getFileById(id);
+  @Get('mine')
+  @UseGuards(JwtAuthGuard)
+  async indexMine(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+    @Req() req,
+  ) {
+    limit = limit > 100 ? 100 : limit;
+    return this.videosService.paginateMyVideos(req.user.id, {
+      page,
+      limit,
+      route: 'http://localhost:3001/videos/mine',
+    });
+  }
 
-  //   const file = createReadStream(
-  //     join(process.cwd(), `src/videos/${entity.filename}`),
-  //   );
-  //   console.log(entity.filename);
-
-  //   response.set({
-  //     'Content-Disposition': `inline; filename="${entity.filename}"`,
-  //     'Content-Type': 'video',
-  //   });
-  //   console.log('asd');
-
-  //   return new StreamableFile(file);
-  // }
   @Get('/all')
   async index(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
@@ -67,14 +67,21 @@ export class VideosController {
     });
   }
 
+  @Get(':id')
+  seeUploadedFile(@Param('id') id, @Res() res) {
+    return res.sendFile(id, { root: './videos' });
+  }
 
-  // @Get('/all')
-  // getAllVideo() {
-  //   return this.videosService.getAllVideo();
-  // }
-  @Get(':imgpath')
-  seeUploadedFile(@Param('imgpath') image, @Res() res) {
-    return res.sendFile(image, { root: './videos' });
+  @Post('/append')
+  @UseGuards(JwtAuthGuard)
+  addedToYourSelfVideo(@Req() req, @Body() video) {
+    return this.usersService.addVideoFile(req.user.id, video);
+  }
+
+  @Post('/checked')
+  @UseGuards(JwtAuthGuard)
+  checkIsAddedVideo(@Req() req, @Body() video) {
+    return this.usersService.checkAddedFile(req.user.id, video);
   }
 
   @Post('add')
@@ -90,7 +97,6 @@ export class VideosController {
     @Req() request: any,
     @UploadedFile() file: Express.Multer.File,
   ) {
-
     return this.videosService.addVideo(file.filename);
   }
 }

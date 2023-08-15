@@ -202,7 +202,7 @@ const getAllVideos = (params) => {
     params,
   });
 };
-const createVideo = (data) => {
+const addVideoById = (data) => {
   const apiParams = getApiParams();
   const headers = {};
 
@@ -210,9 +210,54 @@ const createVideo = (data) => {
 
   return getApiInstance()({
     method: 'POST',
+    url: URLS.ADD_VIDEO_BY_ID,
+    headers,
+    data,
+  });
+};
+const checkOnAddedVideo = (data) => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'POST',
+    url: URLS.CHECK_ADDED_VIDEO,
+    headers,
+    data,
+  });
+};
+
+const getAllUserVideos = (params) => {
+  const apiParams = getApiParams();
+  const headers = {};
+
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'GET',
+    url: URLS.GET_ALL_USER_VIDEOS,
+    headers,
+    params,
+  });
+};
+
+const createVideo = (data, changeProgressFileById, index) => {
+  const apiParams = getApiParams();
+  const headers = {};
+  if (apiParams.authorizationToken) headers.Authorization = `Bearer ${apiParams.authorizationToken}`;
+
+  return getApiInstance()({
+    method: 'POST',
     url: URLS.CREATE_VIDEO,
     data,
     headers,
+    onUploadProgress: (progressEvent) => {
+      const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+
+      changeProgressFileById(index, progress);
+    },
   });
 };
 export default {
@@ -233,4 +278,7 @@ export default {
   createAvatar,
   getAllVideos,
   createVideo,
+  addVideoById,
+  checkOnAddedVideo,
+  getAllUserVideos,
 };

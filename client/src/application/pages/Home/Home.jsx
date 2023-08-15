@@ -31,21 +31,24 @@ const Home = (props) => {
   const n = require('application/assets/img/defaultPhoto.jpg');
 
   return (
-    <div>
+    <>
       <Header />
       <main>
-        <div className="container">
+        <div className="container__wrap">
           <div className="left">
-            <Link onClick={switchToProfile} to={'/profile'} className="profile">
-              <div className="profile-photo">
-                <img src={n} />
-              </div>
-              <div className="handle">
-                <h4>Diana</h4>
-                <p className="text-muted">@dayi</p>
-              </div>
-            </Link>
+            <div className='profile-info'>
+              <Link onClick={switchToProfile} to={'/profile'} className="profile">
+                <div className="profile-photo">
+                  <img src={n} />
+                </div>
+                <div className="handle">
+                  <h4>Diana</h4>
+                  <p className="text-muted">@dayi</p>
+                </div>
+              </Link>
+            </div>
             <Sidebar />
+
           </div>
           <div className="middle">
             <Routes>
@@ -59,7 +62,7 @@ const Home = (props) => {
             </Routes>
           </div>
           {rightNotification && (
-            <div  className="right">
+            <div className="right">
               <Messages />
               <Requests />
             </div>
@@ -67,7 +70,7 @@ const Home = (props) => {
         </div>
       </main>
       <Loading store={loadingStore} />
-    </div>
+    </>
   );
 };
 

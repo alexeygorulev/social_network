@@ -11,10 +11,10 @@ const Item = ({ item, changeClassOnActive }) => {
         onClick={() => changeClassOnActive(item.title)}
         className={`menu-item ${item.isActive ? 'active' : ''}`}
       >
-        <span>
+        <div className='menu-icons'>
           <i className={item.icons}>{item.countsClass && <small className={item.countsClass}>{item.counts}</small>}</i>
-        </span>
-        <h3>{item.title}</h3>
+          <h3>{item.title}</h3>
+        </div>
       </Link>
     </>
   );

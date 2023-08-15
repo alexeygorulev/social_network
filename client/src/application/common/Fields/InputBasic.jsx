@@ -4,7 +4,6 @@ import s from './Fields.module.scss';
 import React from 'react';
 
 const InputBasic = (props) => {
-  const rootEl = useRef(null);
   const { items, placeholder, width, id, onChange, value } = props;
   const [values, setValues] = useState('');
   useEffect(() => {

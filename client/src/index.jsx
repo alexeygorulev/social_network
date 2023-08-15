@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import Application from './application';
 
 function ApplicationWithHandlers() {
-  
   const applicationProps = {
     adminApi: {
       baseUrl: process.env.REACT_APP_API_URL,

@@ -9,6 +9,12 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm/repository/Repository';
 import { Friend } from 'src/friends/friends.model';
 import { DatabaseFilesService } from 'src/database/database.service';
+import {
+  IPaginationOptions,
+  Pagination,
+  paginate,
+} from 'nestjs-typeorm-paginate';
+import { VideosFile } from 'src/video/videos.model';
 
 @Injectable()
 export class UsersService {
@@ -73,6 +79,58 @@ export class UsersService {
   getUserByEmail(email: string): Promise<User> {
     return this.usersRepository.findOne({ where: { email } });
   }
+
+  async checkAddedFile(userId, video) {
+    const user = await this.usersRepository.findOne({
+      where: { id: userId },
+      relations: {
+        videosFile: true,
+      },
+    });
+    return !!user.videosFile.find((item) => item.id === video.id);
+  }
+
+  async getPaginateVideo(userId) {
+    const allVideo = await this.usersRepository
+      .createQueryBuilder('user')
+      .where({ id: userId })
+      .leftJoinAndSelect('user.videosFile', 'videosFile')
+      .getMany();
+
+    return allVideo[0];
+  }
+
+  async getAllUserVideo(userId) {
+    const user = await this.usersRepository.findOne({
+      where: { id: userId },
+      relations: {
+        videosFile: true,
+      },
+    });
+
+    return user.videosFile;
+  }
+
+  async addVideoFile(userId, video) {
+    const user = await this.usersRepository.findOne({
+      where: { id: userId },
+      relations: {
+        videosFile: true,
+      },
+    });
+    const duplicateVideo = await this.checkAddedFile(userId, video);
+    const videoFile = user.videosFile.find((item) => item.id === video.id);
+    if (duplicateVideo) {
+      user.videosFile = user.videosFile
+        .map((item) => (item.id === videoFile.id ? null : item))
+        .filter((item) => item !== null);
+      return this.usersRepository.save(user);
+    } else {
+      user.videosFile = [...user.videosFile, video];
+      return this.usersRepository.save(user);
+    }
+  }
+
   async getUserById(id: string): Promise<any> {
     const users2 = await this.usersRepository.findOne({
       where: { id },
